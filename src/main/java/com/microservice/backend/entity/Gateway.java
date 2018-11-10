@@ -1,6 +1,7 @@
 package com.microservice.backend.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="gateway")
@@ -15,6 +16,17 @@ public class Gateway {
     private String description;
     private String location;
     private Long status;
+
+    @OneToMany(mappedBy = "gateway")
+    private List<Sensor> sensors;
+
+    public List<Sensor> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(List<Sensor> sensors) {
+        this.sensors = sensors;
+    }
 
     public Gateway(){}
     public Gateway(String ip, String port, String description, String location, Long status) {
