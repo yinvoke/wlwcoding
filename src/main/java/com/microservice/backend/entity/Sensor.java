@@ -108,4 +108,8 @@ public class Sensor {
         this.status = status;
     }
 
+    @Override
+    public String toString(){
+        return "Sensor:"+this.description+" "+this.location;
+    }
 }

@@ -84,4 +84,9 @@ public class Gateway {
     public void setStatus(Long status) {
         this.status = status;
     }
+
+    @Override
+    public String toString(){
+        return "Gateway:"+this.getId()+" "+this.getDescription()+" "+this.getLocation();
+    }
 }
