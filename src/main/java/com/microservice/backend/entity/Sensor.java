@@ -2,6 +2,7 @@ package com.microservice.backend.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="sensor")
@@ -21,6 +22,40 @@ public class Sensor {
     @ManyToOne
     @JoinColumn(name="gate_id")
     private Gateway gateway;
+
+    @ManyToOne
+    @JoinColumn(name="classify_id")
+    private SensorClassify sensorClassify;
+
+    @OneToMany(mappedBy = "sensor")
+    private List<SensorException> sensorExceptions;
+
+    @OneToMany(mappedBy = "sensor")
+    private List<Data> datas;
+
+    public List<Data> getDatas() {
+        return datas;
+    }
+
+    public void setDatas(List<Data> datas) {
+        this.datas = datas;
+    }
+
+    public List<SensorException> getSensorExceptions() {
+        return sensorExceptions;
+    }
+
+    public void setSensorExceptions(List<SensorException> sensorExceptions) {
+        this.sensorExceptions = sensorExceptions;
+    }
+
+    public SensorClassify getSensorClassify() {
+        return sensorClassify;
+    }
+
+    public void setSensorClassify(SensorClassify sensorClassify) {
+        this.sensorClassify = sensorClassify;
+    }
 
     public Gateway getGateway() {
         return gateway;
