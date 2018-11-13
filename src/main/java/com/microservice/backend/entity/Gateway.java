@@ -1,11 +1,15 @@
 package com.microservice.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="gateway")
-public class Gateway {
+public class Gateway implements Serializable {
+    private static final long serialVersionUID = 6222176558369919436L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +21,7 @@ public class Gateway {
     private String location;
     private Long status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "gateway")
     private List<Sensor> sensors;
 
@@ -85,8 +90,8 @@ public class Gateway {
         this.status = status;
     }
 
-    @Override
-    public String toString(){
-        return "Gateway:"+this.getId()+" "+this.getDescription()+" "+this.getLocation();
-    }
+//    @Override
+//    public String toString(){
+//        return "Gateway:"+this.getId()+" "+this.getDescription()+" "+this.getLocation();
+//    }
 }

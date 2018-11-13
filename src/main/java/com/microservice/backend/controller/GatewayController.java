@@ -8,15 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/gateway")
-public class GatewayController {
+public class GatewayController extends BaseController{
     @Autowired
     GatewayService gatewayService;
 
-    @RequestMapping(value="/" ,method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value="" ,method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     public String addGateway(HttpServletRequest request){
         String ip = request.getParameter("ip");
@@ -36,22 +38,39 @@ public class GatewayController {
 
     @RequestMapping(path="/{id}",method = RequestMethod.GET,produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String getGatewayById(@PathVariable("id") long id){
+    public HashMap getGatewayById(@PathVariable("id") long id){
         Gateway gateway = new Gateway();
-//        System.out.println(id);
+        HashMap map = new HashMap();
         try{
             gateway = gatewayService.findById(id);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return ErrorResponseUtil.setResponse("400", e.getMessage());
+            map = this.setResponse("error","db error",null);
+            return map;
         }
         if (gateway == null){
-            return ErrorResponseUtil.setResponse("400", "get gateway error");
+            map = this.setResponse("error","db error",null);
+            return map;
         }
         List<Sensor> sensros = gateway.getSensors();
         System.out.println(sensros);
 
-        return  ErrorResponseUtil.setResponse("200", "Gateway:"+gateway.getDescription());
+        map = this.setResponse("success","",gateway);
+        return map;
+    }
+
+    @RequestMapping(value="" ,method = RequestMethod.GET,produces = "application/json; charset=utf-8")
+    public HashMap getAllGateway(){
+        List<Gateway> gateways = new ArrayList<Gateway>();
+        HashMap map = new HashMap();
+        try{
+            gateways = gatewayService.findAll();
+        }catch (Exception e){
+            map = this.setResponse("error","db error",null);
+            return map;
+        }
+        map = this.setResponse("success",null,gateways);
+        return map;
     }
 
 

@@ -2,7 +2,10 @@ package com.microservice.backend.service;
 
 import com.microservice.backend.entity.Gateway;
 
+import java.util.List;
+
 public interface GatewayService {
     void inset(Gateway gateway);
     Gateway findById(long id);
+    List<Gateway> findAll();
 }

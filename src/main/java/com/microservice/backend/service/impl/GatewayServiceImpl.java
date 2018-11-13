@@ -6,6 +6,7 @@ import com.microservice.backend.service.GatewayService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("gatewayService")
 public class GatewayServiceImpl implements GatewayService{
@@ -21,5 +22,10 @@ public class GatewayServiceImpl implements GatewayService{
     @Override
     public Gateway findById(long id) {
         return gatewayRepository.findById(id);
+    }
+
+    @Override
+    public List<Gateway> findAll() {
+        return gatewayRepository.findAll();
     }
 }

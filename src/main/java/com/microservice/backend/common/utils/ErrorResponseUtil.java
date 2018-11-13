@@ -31,7 +31,6 @@ public class ErrorResponseUtil {
      * @return String
      */
     public static String setResponse(String errcode ,String errmsg){
-
         Map<String,String> response = new HashMap<String,String>();
         response.put("errcode", errcode) ;
         response.put("errmsg", errmsg) ;
