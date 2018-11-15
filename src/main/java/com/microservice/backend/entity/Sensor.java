@@ -1,5 +1,7 @@
 package com.microservice.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -19,17 +21,21 @@ public class Sensor {
     private Date maintenance_time;
     private Long status;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="gate_id")
     private Gateway gateway;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="classify_id")
     private SensorClassify sensorClassify;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sensor")
     private List<SensorException> sensorExceptions;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sensor")
     private List<Data> datas;
 
@@ -68,7 +74,7 @@ public class Sensor {
     public Sensor() {
     }
 
-    public Sensor(String description, String location, String factory, Date install_time, Date produce_date, Date maintenance_time, Long status, Gateway gateway) {
+    public Sensor(String description, String location, String factory, Date install_time, Date produce_date, Date maintenance_time, Long status, Gateway gateway,SensorClassify sensorClassify) {
         this.description = description;
         this.location = location;
         this.factory = factory;
@@ -77,6 +83,7 @@ public class Sensor {
         this.maintenance_time = maintenance_time;
         this.status = status;
         this.gateway = gateway;
+        this.sensorClassify = sensorClassify;
     }
 
     public Long getId() {

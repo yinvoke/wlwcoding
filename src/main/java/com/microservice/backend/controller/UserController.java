@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController {
+public class UserController extends BaseController{
 
     @Autowired
     private UserService userService;
@@ -37,9 +38,10 @@ public class UserController {
 
     @RequestMapping(value="/login" ,method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String login(HttpServletRequest request){
+    public HashMap login(HttpServletRequest request){
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        HashMap map = new HashMap();
         User user;
         try {
             user = userService.findByUsernameAndPassword(username,password);
@@ -49,11 +51,13 @@ public class UserController {
             System.out.println("Exception:"+e.getMessage());
         }
 
-        if(user != null){
-            return ErrorResponseUtil.setResponse("200", "login successful "+user.getNick_name());
+        if(user == null){
+            map = this.setResponse("error","passwrd error or user not exist",null);
+            return  map;
         }
 
-        return ErrorResponseUtil.setResponse("400", "Login fail ");
+        map = this.setResponse("success",null,user);
+        return map;
     }
 
 

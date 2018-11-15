@@ -1,5 +1,7 @@
 package com.microservice.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,6 +15,7 @@ public class User implements Serializable{
     private Long id;
     private String username;
     private String nick_name;
+    @JsonIgnore
     private String password;
     private Long status;
 

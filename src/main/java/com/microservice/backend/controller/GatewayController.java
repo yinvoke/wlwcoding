@@ -20,20 +20,22 @@ public class GatewayController extends BaseController{
 
     @RequestMapping(value="" ,method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String addGateway(HttpServletRequest request){
+    public HashMap addGateway (HttpServletRequest request){
         String ip = request.getParameter("ip");
         String port = request.getParameter("port");
         String description =  request.getParameter("description");
         String location = request.getParameter("location");
         Gateway gateway = new Gateway(ip,port,description,location,1L);
+        HashMap map = new HashMap();
         try{
             gatewayService.inset(gateway);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return ErrorResponseUtil.setResponse("400", e.getMessage());
+            map = this.setResponse("error","db error",null);
+            return map;
         }
-
-        return ErrorResponseUtil.setResponse("200", "Add gateway success");
+        map = this.setResponse("success",null,gateway);
+        return map;
     }
 
     @RequestMapping(path="/{id}",method = RequestMethod.GET,produces = "application/json; charset=utf-8")
@@ -73,6 +75,25 @@ public class GatewayController extends BaseController{
         return map;
     }
 
+    @RequestMapping(value="/sensors/{id}" ,method = RequestMethod.GET,produces = "application/json; charset=utf-8")
+    public HashMap getAllSensors(@PathVariable("id") long id){
+        Gateway gateway = new Gateway();
+        HashMap map = new HashMap();
+        try{
+            gateway = gatewayService.findById(id);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            map = this.setResponse("error","db error",null);
+            return map;
+        }
+        if (gateway == null){
+            map = this.setResponse("error","db error",null);
+            return map;
+        }
+        List<Sensor> sensros = gateway.getSensors();
+        map = this.setResponse("success","",sensros);
+        return map;
+    }
 
 
 }
