@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -39,16 +41,23 @@ public class SensorController extends BaseController{
         String classify_id_str = request.getParameter("classify_id");
         long classify_id = Long.parseLong(classify_id_str);
         String maintenance_time_str = request.getParameter("maintenance_time");
-        Date maintenance_time = new Date(Long.parseLong(maintenance_time_str));
         String produce_date_str = request.getParameter("produce_date");
-        Date produce_date = new Date(Long.parseLong(produce_date_str));
-
         Gateway gateway = gatewayService.findById(gate_id);
         SensorClassify classify = sensorClassifyService.findById(classify_id);
 
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date maintenance_time = new Date();
+        Date produce_date = new Date();
+        HashMap map = new HashMap();
+        try{
+            maintenance_time = format.parse(maintenance_time_str);
+            produce_date = format.parse(produce_date_str);
+        }catch (Exception e){
+            map = this.setResponse("error","date format error",null);
+            return map;
+        }
         Sensor sensor = new Sensor(description,location,factory,install_time,produce_date,maintenance_time,1L,gateway,classify);
 
-        HashMap map = new HashMap();
         try{
             sensorService.insert(sensor);
         }catch (Exception e){
