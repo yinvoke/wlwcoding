@@ -1,6 +1,7 @@
 package com.microservice.backend.service.impl;
 
 import com.microservice.backend.entity.Gateway;
+import com.microservice.backend.entity.SensorClassify;
 import com.microservice.backend.repository.GatewayRepository;
 import com.microservice.backend.service.GatewayService;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,10 @@ public class GatewayServiceImpl implements GatewayService{
     @Override
     public List<Gateway> findAll() {
         return gatewayRepository.findAll();
+    }
+
+    @Override
+    public List<SensorClassify> findClassifyById(long id) {
+        return gatewayRepository.findClassifyById(id);
     }
 }

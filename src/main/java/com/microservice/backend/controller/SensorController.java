@@ -1,6 +1,5 @@
 package com.microservice.backend.controller;
 
-import com.microservice.backend.common.utils.ErrorResponseUtil;
 import com.microservice.backend.entity.Gateway;
 import com.microservice.backend.entity.Sensor;
 import com.microservice.backend.entity.SensorClassify;

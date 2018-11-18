@@ -242,4 +242,194 @@ gateway's id
 }
 ```
 
+#### 0x07 获取某网关下的传感器类型列表 
+
+
+* url:http://iot.wduozhi.xyz/api/gateway/classify/{id} 
+* method:get 
+
+##### get
+
+gateway's id
+
+##### reurn 
+
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "温度传感器",
+            "status": 1,
+            "sensors": [
+                {
+                    "id": 3,
+                    "description": "haha，我是网关一号",
+                    "location": "天马-1-3-135",
+                    "factory": "华美集团",
+                    "install_time": "2009-02-13T23:31:30.000+0000",
+                    "produce_date": "2009-02-13T23:31:30.000+0000",
+                    "maintenance_time": "2009-02-13T23:31:30.000+0000",
+                    "status": 1
+                },
+                {
+                    "id": 6,
+                    "description": "haha，我是网关四号",
+                    "location": "天马-1-3-135",
+                    "factory": "华美集团",
+                    "install_time": "2009-02-13T23:31:30.000+0000",
+                    "produce_date": "2009-02-13T23:31:30.000+0000",
+                    "maintenance_time": "2009-02-13T23:31:30.000+0000",
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "湿度传感器_1",
+            "status": 1,
+            "sensors": [
+                {
+                    "id": 4,
+                    "description": "haha，我是网关二号",
+                    "location": "天马-1-3-135",
+                    "factory": "华美集团",
+                    "install_time": "2009-02-13T23:31:30.000+0000",
+                    "produce_date": "2009-02-13T23:31:30.000+0000",
+                    "maintenance_time": "2009-02-13T23:31:30.000+0000",
+                    "status": 1
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": " 湿度传感器_2",
+            "status": 1,
+            "sensors": [
+                {
+                    "id": 5,
+                    "description": "haha，我是网关三号",
+                    "location": "天马-1-3-135",
+                    "factory": "华美集团",
+                    "install_time": "2009-02-13T23:31:30.000+0000",
+                    "produce_date": "2009-02-13T23:31:30.000+0000",
+                    "maintenance_time": "2009-02-13T23:31:30.000+0000",
+                    "status": 1
+                }
+            ]
+        }
+    ],
+    "message": "",
+    "status": "success"
+}
+```
+
+#### 0x08 添加传感器类型
+
+* url:http://iot.wduozhi.xyz/api/classify 
+* method:post
+
+##### get
+
+* name
+    - 类型名称，string
+
+##### return 
+
+```
+{
+    "data": {
+        "id": 4,
+        "name": "湿度传感器",
+        "status": 1,
+        "sensors": null
+    },
+    "message": "",
+    "status": "success"
+}
+```
+
+#### 0x09 获取所有传感器类型
+
+* url:http://iot.wduozhi.xyz/api/classify
+* method:get
+
+##### get 
+
+null
+
+##### return 
+
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "温度传感器",
+            "status": 1,
+            "sensors": null
+        },
+        {
+            "id": 2,
+            "name": "湿度传感器_1",
+            "status": 1,
+            "sensors": null
+        },
+        {
+            "id": 3,
+            "name": " 湿度传感器_2",
+            "status": 1,
+            "sensors": null
+        },
+        {
+            "id": 4,
+            "name": "湿度传感器_3",
+            "status": 1,
+            "sensors": null
+        }
+    ],
+    "message": "",
+    "status": "success"
+}
+```
+
+#### 0xA 获取某传感器类型下的传感器
+
+* url：http://iot.wduozhi.xyz/api/classify/sensors/{id}
+* method:get
+
+##### get
+
+classify's id
+
+##### return
+
+```
+{
+    "data": [
+        {
+            "id": 3,
+            "description": "haha，我是网关一号",
+            "location": "天马-1-3-135",
+            "factory": "华美集团",
+            "install_time": "2009-02-13T23:31:30.000+0000",
+            "produce_date": "2009-02-13T23:31:30.000+0000",
+            "maintenance_time": "2009-02-13T23:31:30.000+0000",
+            "status": 1
+        },
+        {
+            "id": 6,
+            "description": "haha，我是网关四号",
+            "location": "天马-1-3-135",
+            "factory": "华美集团",
+            "install_time": "2009-02-13T23:31:30.000+0000",
+            "produce_date": "2009-02-13T23:31:30.000+0000",
+            "maintenance_time": "2009-02-13T23:31:30.000+0000",
+            "status": 1
+        }
+    ],
+    "message": "",
+    "status": "success"
+}
+```
 

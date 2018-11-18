@@ -3,7 +3,9 @@ package com.microservice.backend.controller;
 import com.microservice.backend.common.utils.ErrorResponseUtil;
 import com.microservice.backend.entity.Gateway;
 import com.microservice.backend.entity.Sensor;
+import com.microservice.backend.entity.SensorClassify;
 import com.microservice.backend.service.GatewayService;
+import com.microservice.backend.service.SensorClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,9 @@ import java.util.List;
 public class GatewayController extends BaseController{
     @Autowired
     GatewayService gatewayService;
+
+    @Autowired
+    SensorClassifyService sensorClassifyService;
 
     @RequestMapping(value="" ,method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
@@ -92,6 +97,21 @@ public class GatewayController extends BaseController{
         }
         List<Sensor> sensros = gateway.getSensors();
         map = this.setResponse("success","",sensros);
+        return map;
+    }
+
+    @RequestMapping(path = "/classify/{id}",method = RequestMethod.GET,produces = "application/json; charset=utf-8")
+    public HashMap getAllClassify(@PathVariable("id") long id){
+        HashMap map = new HashMap();
+        List<SensorClassify> sensorClassifies = null;
+        try {
+            sensorClassifies = sensorClassifyService.findSensorClassifiesByGateway(id);
+        }catch (Exception e){
+            System.out.print(e.getMessage());
+            map =  this.setResponse("error","db error",null);
+            return map;
+        }
+        map = this.setResponse("success","",sensorClassifies);
         return map;
     }
 
