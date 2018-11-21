@@ -1,5 +1,7 @@
 package com.microservice.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class SensorClassify {
     private String name;
     private Long status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sensorClassify")
     private List<Sensor> sensors;
 

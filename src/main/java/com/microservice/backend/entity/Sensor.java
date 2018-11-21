@@ -26,7 +26,6 @@ public class Sensor {
     @JoinColumn(name="gate_id")
     private Gateway gateway;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="classify_id")
     private SensorClassify sensorClassify;
