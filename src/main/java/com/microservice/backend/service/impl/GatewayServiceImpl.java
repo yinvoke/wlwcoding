@@ -34,4 +34,9 @@ public class GatewayServiceImpl implements GatewayService{
     public List<SensorClassify> findClassifyById(long id) {
         return gatewayRepository.findClassifyById(id);
     }
+
+    @Override
+    public void update(Gateway gateway) {
+        gatewayRepository.save(gateway);
+    }
 }

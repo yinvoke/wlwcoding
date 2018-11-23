@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,13 @@ public class Gateway implements Serializable {
     @OneToMany(mappedBy = "gateway")
     private List<Sensor> sensors;
 
-    public List<Sensor> getSensors() {
-        return sensors;
+    public List<Sensor> getSensors() {  //返回status为1的传感器
+        List<Sensor> valid_sensors = new ArrayList<>(this.sensors.size());
+        for(Sensor sensor:this.sensors){
+            if(sensor.getStatus() == 1)
+                valid_sensors.add(sensor);
+        }
+        return valid_sensors;
     }
 
     public void setSensors(List<Sensor> sensors) {
@@ -90,8 +96,4 @@ public class Gateway implements Serializable {
         this.status = status;
     }
 
-//    @Override
-//    public String toString(){
-//        return "Gateway:"+this.getId()+" "+this.getDescription()+" "+this.getLocation();
-//    }
 }

@@ -3,6 +3,7 @@ package com.microservice.backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -51,7 +52,12 @@ public class SensorClassify {
     }
 
     public List<Sensor> getSensors() {
-        return sensors;
+        List<Sensor> valid_sensors = new ArrayList<>(this.sensors.size());
+        for(Sensor sensor:this.sensors){
+            if(sensor.getStatus() == 1)
+                valid_sensors.add(sensor);
+        }
+        return valid_sensors;
     }
 
     public void setSensors(List<Sensor> sensors) {

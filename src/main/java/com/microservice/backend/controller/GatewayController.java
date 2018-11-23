@@ -43,6 +43,58 @@ public class GatewayController extends BaseController{
         return map;
     }
 
+    @RequestMapping(value="" ,method = RequestMethod.PUT, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public HashMap updateGateway (HttpServletRequest request){
+        long id = Long.parseLong(request.getParameter("id"));
+        String ip = request.getParameter("ip");
+        String port = request.getParameter("port");
+        String description =  request.getParameter("description");
+        String location = request.getParameter("location");
+        Gateway gateway = gatewayService.findById(id);
+        HashMap map = new HashMap();
+        if(ip.length()!=0)
+            gateway.setIp(ip);
+        if (port.length()!=0)
+            gateway.setPort(port);
+        if(description.length()!=0)
+            gateway.setDescription(description);
+        if (location.length()!=0)
+            gateway.setLocation(location);
+        try{
+            gatewayService.update(gateway);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            map = this.setResponse("error","db error",null);
+            return map;
+        }
+        map = this.setResponse("success",null,gateway);
+        return map;
+    }
+
+    @RequestMapping(path="/{id}",method = RequestMethod.DELETE, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public HashMap deleteGateway(@PathVariable("id") long id){
+        Gateway gateway = gatewayService.findById(id);
+        HashMap map = null;
+        if (gateway == null){
+            map = this.setResponse("error","id error,not this gateway",null);
+            return map;
+        }
+        gateway.setStatus(0L);
+        try{
+            gatewayService.update(gateway);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            map = this.setResponse("error","db error",null);
+            return map;
+        }
+
+        map = this.setResponse("success",null,null);
+        return map;
+    }
+
+
     @RequestMapping(path="/{id}",method = RequestMethod.GET,produces = "application/json; charset=utf-8")
     @ResponseBody
     public HashMap getGatewayById(@PathVariable("id") long id){

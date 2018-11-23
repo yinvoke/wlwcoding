@@ -18,6 +18,11 @@ public class SensorServiceImpl implements SensorService{
     }
 
     @Override
+    public void update(Sensor sensor) {
+        sensorRepository.save(sensor);
+    }
+
+    @Override
     public Sensor findById(long id) {
         return sensorRepository.findById(id);
     }
