@@ -1,5 +1,6 @@
 package com.microservice.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -16,9 +17,15 @@ public class Sensor {
     private String description;
     private String location;
     private String factory;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date install_time;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date produce_date;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date maintenance_time;
+
     private Long status;
 
     @JsonIgnore
