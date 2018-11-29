@@ -60,5 +60,29 @@ public class UserController extends BaseController{
         return map;
     }
 
+    @RequestMapping(value="/password" ,method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    HashMap changePassword(HttpServletRequest request){
+        long id = Long.parseLong(request.getParameter("id"));
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        User user = userService.findById(id);
+        HashMap map = null;
+        if(user == null){
+            map = this.setResponse("error","id error",null);
+            return map;
+        }
+        if(user.getPassword().equals(oldPassword)){
+            user.setPassword(newPassword);
+            userService.insert(user);
+        }else{
+            map = this.setResponse("error","old password error",null);
+            return map;
+        }
+        map = this.setResponse("success","",user);
+        return map;
+    }
+
+
 
 }
