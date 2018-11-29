@@ -62,7 +62,7 @@ public class UserController extends BaseController{
 
     @RequestMapping(value="/password" ,method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    HashMap changePassword(HttpServletRequest request){
+    public HashMap changePassword(HttpServletRequest request){
         long id = Long.parseLong(request.getParameter("id"));
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
