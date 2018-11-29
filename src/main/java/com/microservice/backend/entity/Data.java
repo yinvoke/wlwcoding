@@ -1,5 +1,8 @@
 package com.microservice.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,9 +14,11 @@ public class Data {
     private Long id;
 
     private Float data;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
     private Long status;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="sensor_id")
     private Sensor sensor;

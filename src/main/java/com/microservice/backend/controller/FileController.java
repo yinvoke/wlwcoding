@@ -102,7 +102,7 @@ public class FileController {
 
     private void createSensorTitle(HSSFWorkbook workbook, HSSFSheet sheet,Sensor sensor){
         //设置列宽，setColumnWidth的第二个参数要乘以256，这个参数的单位是1/256个字符宽度
-        sheet.setColumnWidth(0,6*256);
+        sheet.setColumnWidth(0,20*256);
         sheet.setColumnWidth(1,50*256);
         sheet.setColumnWidth(2,30*256);
         sheet.setColumnWidth(3,30*256);
@@ -142,6 +142,25 @@ public class FileController {
         sensorRow.createCell(4).setCellValue(sensor.getLocation());
         sensorRow.createCell(5).setCellValue(sensor.getSensorClassify().getName());
 
+        HSSFRow sensorDataRow = sheet.createRow(3);
+        List<Data> datas = sensor.getDatas();
+        String sensorDataTitle[] = {"时间","数据"};
+        length = sensorDataTitle.length;
+        for (int i=0;i<length;i++) {
+            cell = sensorDataRow.createCell(i);
+            cell.setCellValue(sensorDataTitle[i]);
+            cell.setCellStyle(style);
+        }
+
+        int rowNum = 4;
+        for(Data data:datas){
+            HSSFRow dataRow = sheet.createRow(rowNum);
+            HSSFCell tmp =  dataRow.createCell(0);
+            tmp.setCellStyle(dateStyle);
+            tmp.setCellValue(data.getTime());
+            dataRow.createCell(1).setCellValue(data.getData());
+            rowNum++;
+        }
     }
 
     private void createGatewayTitle(HSSFWorkbook workbook, HSSFSheet sheet, Gateway gateway, List<Sensor> sensors){

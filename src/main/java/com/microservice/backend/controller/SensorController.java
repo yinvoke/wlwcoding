@@ -1,5 +1,6 @@
 package com.microservice.backend.controller;
 
+import com.microservice.backend.entity.Data;
 import com.microservice.backend.entity.Gateway;
 import com.microservice.backend.entity.Sensor;
 import com.microservice.backend.entity.SensorClassify;
@@ -16,6 +17,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/sensor")
@@ -148,6 +150,21 @@ public class SensorController extends BaseController{
         }
 
         map = this.setResponse("success","",sensor);
+        return map;
+    }
+
+    @RequestMapping(path="data/{id}",method = RequestMethod.GET,produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public HashMap getSensorDataById(@PathVariable("id") long id){
+        Sensor sensor = sensorService.findById(id);
+        HashMap map = null;
+        if (sensor == null){
+            map = this.setResponse("error","id error,no this sensor",null);
+            return map;
+        }
+
+        List<Data> datas = sensor.getDatas();
+        map = this.setResponse("success","",datas);
         return map;
     }
 
