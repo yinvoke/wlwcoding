@@ -787,3 +787,22 @@ file
     "status": "success"
 }
 ```
+
+
+#### 0xE 修改密码
+
+* url：http://iot.wduozhi.xyz/api/user/password
+* method:post
+
+##### get
+
+* id
+* oldPassword
+* newPassword
+
+
+##### return
+
+{
+    
+}
