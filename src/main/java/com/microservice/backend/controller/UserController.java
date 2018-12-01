@@ -83,6 +83,24 @@ public class UserController extends BaseController{
         return map;
     }
 
-
+    @RequestMapping(value = "/modify", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public HashMap changeBasicInformation(HttpServletRequest request){
+        long id = Long.parseLong(request.getParameter("id"));
+        String newTel = request.getParameter("newTel");
+        String newEmail = request.getParameter("newEmail");
+        User user = userService.findById(id);
+        HashMap map = null;
+        if(user == null){
+            map = this.setResponse("error","change information failure",null);
+            return map;
+        }else{
+            user.setEmail(newEmail);
+            user.setTel(newTel);
+            userService.insert(user);
+        }
+        map = this.setResponse("success","",user);
+        return map;
+    }
 
 }

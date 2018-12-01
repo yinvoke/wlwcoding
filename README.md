@@ -593,8 +593,7 @@ file
 
 ##### return
 
-```aidl
-{
+```aidl{
     "data": [
         {
             "id": 1,
@@ -799,6 +798,25 @@ file
 * id
 * oldPassword
 * newPassword
+
+
+##### return
+
+{
+    
+}
+
+
+#### 0xF 修改个人信息
+
+* url：http://iot.wduozhi.xyz/api/user/modify
+* method:post
+
+##### get
+
+* id
+* newTel
+* newEmail
 
 
 ##### return
