@@ -93,15 +93,16 @@ public class UserController extends BaseController{
         User user = userService.findById(id);
         HashMap map = null;
         if(user == null){
-            map = this.setResponse("error","change information failure",null);
+            map = this.setResponse("error","update information failure",null);
             return map;
         }else{
             user.setUsername(newUsername);
             user.setEmail(newEmail);
             user.setTel(newTel);
             userService.insert(user);
+            map = this.setResponse("success","update information success",user);
         }
-        map = this.setResponse("success","update success",user);
+
         return map;
     }
 
