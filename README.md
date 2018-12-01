@@ -815,6 +815,7 @@ file
 ##### get
 
 * id
+* newUsername
 * newTel
 * newEmail
 

@@ -87,6 +87,7 @@ public class UserController extends BaseController{
     @ResponseBody
     public HashMap changeBasicInformation(HttpServletRequest request){
         long id = Long.parseLong(request.getParameter("id"));
+        String newUsername = request.getParameter("newUsername");
         String newTel = request.getParameter("newTel");
         String newEmail = request.getParameter("newEmail");
         User user = userService.findById(id);
@@ -95,11 +96,12 @@ public class UserController extends BaseController{
             map = this.setResponse("error","change information failure",null);
             return map;
         }else{
+            user.setUsername(newUsername);
             user.setEmail(newEmail);
             user.setTel(newTel);
             userService.insert(user);
         }
-        map = this.setResponse("success","",user);
+        map = this.setResponse("success","update success",user);
         return map;
     }
 
