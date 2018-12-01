@@ -825,3 +825,60 @@ file
 {
     
 }
+
+
+#### 0x10 获取所有传感器异常
+
+* url:http://iot.wduozhi.xyz/api/sensorException
+* method:post
+
+##### get 
+
+null
+
+##### return 
+
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "description":"出现异常",
+            "status": 1,
+            "time": "2018-11-27 02:08:07",
+            "gateway_id": 1
+        }
+    ],
+    "message": "",
+    "status": "success"
+}
+```
+
+
+
+#### 0x10 获取所有传感器异常
+
+* url:http://iot.wduozhi.xyz/api/gatewayException
+* method:post
+
+##### get 
+
+null
+
+##### return 
+
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "description":"出现异常",
+            "status": 1,
+            "time": "2018-11-27 02:08:07",
+            "sensor_id": 1
+        }
+    ],
+    "message": "",
+    "status": "success"
+}
+```
