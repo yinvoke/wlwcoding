@@ -1,16 +1,19 @@
 package com.microservice.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="Sensorexception")
+@Table(name="SensorException")
 public class SensorException {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date time;
     private Long status;
 
