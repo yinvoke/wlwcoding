@@ -34,7 +34,7 @@ public class DataController extends BaseController {
         float ran = 0;
         for (int i=0;i<30;i++){
             ran = random.nextFloat();
-            now += i*10;
+            now += i*200;
             Date d = new Date(now);
             Data tmp = new Data(new Float(ran),d,1L,sensor);
             System.out.print(tmp.getData());

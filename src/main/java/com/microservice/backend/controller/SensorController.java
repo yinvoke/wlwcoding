@@ -98,7 +98,7 @@ public class SensorController extends BaseController{
         sensor.setSensorClassify(classify);
 
         long gate_id = Long.parseLong(request.getParameter("gate_id"));
-        Gateway gateway = gatewayService.findById(id);
+        Gateway gateway = gatewayService.findById(gate_id);
         sensor.setGateway(gateway);
         sensor.setStatus(1L);
         try{
