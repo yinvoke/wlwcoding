@@ -827,7 +827,7 @@ file
 }
 
 
-#### 0x10 获取所有传感器异常
+#### 0x10 获取所有网关异常
 
 * url:http://iot.wduozhi.xyz/api/sensorException
 * method:post
