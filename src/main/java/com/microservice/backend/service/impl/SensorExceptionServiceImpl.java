@@ -19,4 +19,9 @@ public class SensorExceptionServiceImpl implements SensorExceptionService {
     public List<SensorException> findAll(){
         return sensorExceptionRepository.findAll();
     }
+
+    @Override
+    public List<SensorException> findByTime(String dataFrom, String dataTo){
+        return sensorExceptionRepository.findByTime(dataFrom, dataTo);
+    }
 }

@@ -11,4 +11,7 @@ public interface GatewayExceptionRepository extends JpaRepository<GatewayExcepti
     @Override
     @Query("SELECT gateway_exception from GatewayException gateway_exception where gateway_exception.status=0")
     List<GatewayException> findAll();
+
+    @Query(value = "SELECT gateway_exception from GatewayException gateway_exception where gateway_exception.status=0 and gateway_exception.time>?1 and gateway_exception.time<?2",nativeQuery = true)
+    List<GatewayException> findByTime(String dataFrom, String dataTo);
 }

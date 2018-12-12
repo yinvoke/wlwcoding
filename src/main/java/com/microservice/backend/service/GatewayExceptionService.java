@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface GatewayExceptionService {
     List<GatewayException> findAll();
+    List<GatewayException> findByTime(String dataFrom, String dataTo);
 }

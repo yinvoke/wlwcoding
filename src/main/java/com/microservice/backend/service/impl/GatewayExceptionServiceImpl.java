@@ -17,4 +17,9 @@ public class GatewayExceptionServiceImpl implements GatewayExceptionService {
     public List<GatewayException> findAll(){
         return GatewayExceptionRepository.findAll();
     }
+
+    @Override
+    public List<GatewayException> findByTime(String dataFrom, String dataTo){
+        return GatewayExceptionRepository.findByTime(dataFrom, dataTo);
+    }
 }

@@ -10,4 +10,7 @@ public interface SensorExceptionRepository extends JpaRepository<SensorException
     @Override
     @Query("SELECT sensor_exception from SensorException sensor_exception where sensor_exception.status=0")
     List<SensorException> findAll();
+
+    @Query(value = "SELECT sensor_exception from SensorException sensor_exception where sensor_exception.status=0 and sensor_exception.time>?1 and sensor_exception.time<?2",nativeQuery = true)
+    List<SensorException> findByTime(String dataFrom, String dataTo);
 }
