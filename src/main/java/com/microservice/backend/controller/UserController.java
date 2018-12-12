@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 
@@ -55,7 +56,9 @@ public class UserController extends BaseController{
             map = this.setResponse("error","passwrd error or user not exist",null);
             return  map;
         }
-
+        //登录成功，添加session
+        HttpSession session = request.getSession();
+        session.setAttribute("user",user);
         map = this.setResponse("success",null,user);
         return map;
     }
