@@ -829,7 +829,7 @@ file
 
 #### 0x10 获取所有网关异常
 
-* url:http://iot.wduozhi.xyz/api/sensorException
+* url:http://iot.wduozhi.xyz/api/gatewayException
 * method:post
 
 ##### get 
@@ -858,7 +858,7 @@ null
 
 #### 0x11 获取所有传感器异常
 
-* url:http://iot.wduozhi.xyz/api/gatewayException
+* url:http://iot.wduozhi.xyz/api/sensorException
 * method:post
 
 ##### get 
@@ -885,7 +885,7 @@ null
 
 #### 0x11 获取一段时间内传感器异常
 
-* url:http://iot.wduozhi.xyz/api/gatewayException/{dataFrom}{dataTo}
+* url:http://iot.wduozhi.xyz/api/sensorException/{dataFrom}{dataTo}
 * method:post
 
 ##### get 
