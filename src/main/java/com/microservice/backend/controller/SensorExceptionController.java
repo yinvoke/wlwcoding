@@ -15,7 +15,7 @@ public class SensorExceptionController extends BaseController{
     @Autowired
     SensorExceptionService sensorExceptionService = null;
 
-    @RequestMapping(value="",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value="",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public HashMap getAllSensorException(){
         List<SensorException> sensorExceptions = new ArrayList<SensorException>();
         HashMap map = new HashMap();

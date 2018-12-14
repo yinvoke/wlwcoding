@@ -16,7 +16,7 @@ public class GatewayExceptionController extends BaseController{
     @Autowired
     GatewayExceptionService gatewayExceptionService;
 
-    @RequestMapping(value="",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value="",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public HashMap getAllGatewayException(){
         List<GatewayException> gatewayExceptions = new ArrayList<GatewayException>();
         HashMap map = new HashMap();
