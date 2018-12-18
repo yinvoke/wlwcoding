@@ -830,7 +830,7 @@ file
 #### 0x10 获取所有网关异常
 
 * url:http://iot.wduozhi.xyz/api/sensorException
-* method:post
+* method:get
 
 ##### get 
 
@@ -859,7 +859,7 @@ null
 #### 0x11 获取所有传感器异常
 
 * url:http://iot.wduozhi.xyz/api/gatewayException
-* method:post
+* method:get
 
 ##### get 
 
@@ -885,8 +885,9 @@ null
 
 #### 0x11 获取一段时间内传感器异常
 
-* url:http://iot.wduozhi.xyz/api/gatewayException/{dataFrom}{dataTo}
-* method:post
+* url:http://iot.wduozhi.xyz/api/gatewayException/{datas}
+* method:get
+* 注解：datas 为 {dataFrom,dataTo} 示例 {2018-10-12 19:30:12,2018-10-13 19:30:12}
 
 ##### get 
 
@@ -914,13 +915,13 @@ null
 
 #### 0x11 获取一段时间内网关异常
 
-* url:http://iot.wduozhi.xyz/api/gatewayException/{dataFrom}{dataTo}
-* method:post
+* url:http://iot.wduozhi.xyz/api/gatewayException/{datas}
+* method:get
+* 注解：datas 为 {dataFrom,dataTo} 示例 {2018-10-12 19:30:12,2018-10-13 19:30:12}
 
 ##### get 
 
-* dataFrom
-* dataTo
+* dataFrom,dataTo
 
 ##### return 
 

@@ -16,7 +16,7 @@ public class GatewayExceptionController extends BaseController{
     @Autowired
     GatewayExceptionService gatewayExceptionService;
 
-    @RequestMapping(value="",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value="",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public HashMap getAllGatewayException(){
         List<GatewayException> gatewayExceptions = new ArrayList<GatewayException>();
         HashMap map = new HashMap();
@@ -31,10 +31,13 @@ public class GatewayExceptionController extends BaseController{
         return  map;
     }
 
-    @RequestMapping(path = "/{dataFrom}{dataTo}",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(path = "/{datas}",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public HashMap getDataGatewayException(@PathVariable("dataFrom") String dataFrom, @PathVariable("dataTo") String dataTo){
+    public HashMap getDataGatewayException(@PathVariable("datas") String datas){
         List<GatewayException> gatewayExceptions = new ArrayList<GatewayException>();
+        String[] s = datas.split(",");
+        String dataFrom = s[0];
+        String dataTo = s[1];
         HashMap map = new HashMap();
         try {
             gatewayExceptions = gatewayExceptionService.findByTime(dataFrom, dataTo);
