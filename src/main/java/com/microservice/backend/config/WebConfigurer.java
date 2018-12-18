@@ -20,7 +20,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     // 这个方法用来注册拦截器，我们自己写好的拦截器需要通过这里添加注册才能生效
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/api/user/login", "/api/user/register");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/api/user/login", "/api/user/register","/api/data/http");
     }
 
 }

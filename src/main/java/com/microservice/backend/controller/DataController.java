@@ -2,7 +2,9 @@ package com.microservice.backend.controller;
 
 import com.microservice.backend.entity.Data;
 import com.microservice.backend.entity.Sensor;
+import com.microservice.backend.entity.SensorException;
 import com.microservice.backend.service.DataService;
+import com.microservice.backend.service.SensorExceptionService;
 import com.microservice.backend.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ public class DataController extends BaseController {
 
     @Autowired
     DataService dataService;
+
+    @Autowired
+    SensorExceptionService sensorExceptionService;
 
     @Autowired
     SensorService sensorService;
@@ -50,4 +55,53 @@ public class DataController extends BaseController {
         map = this.setResponse("success","",datas);
         return map;
     }
+
+    @RequestMapping(path="/http",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public HashMap receive(@RequestBody Map jsonParam){
+        List jsonDatas = (ArrayList)jsonParam.get("datas");
+        List<Data> sensorDatas = new ArrayList<>();
+        for(int i=0;i< jsonDatas.size();i++){
+            HashMap hashMap = (HashMap)jsonDatas.get(i);
+            Data tmp = this.formateData(Float.parseFloat(hashMap.get("data").toString()),Long.parseLong(hashMap.get("sensor_id").toString()),Long.parseLong(hashMap.get("time").toString()));
+
+            //模拟产生传感器异常
+            if(Float.parseFloat(hashMap.get("data").toString()) < 0.2){
+                this.createSensorException(Long.parseLong(hashMap.get("sensor_id").toString()));
+            }
+
+            sensorDatas.add(tmp);
+        }
+        HashMap map = new HashMap();
+        try{
+            dataService.inserts(sensorDatas);
+        }catch (Exception e){
+            System.out.print(e.toString());
+            map = this.setResponse("error","db error",null);
+            return map;
+        }
+        map = this.setResponse("success","",sensorDatas);
+        return map;
+    }
+
+    private Data formateData(Float sensorData,Long sensor_id,Long time){
+        Sensor sensor = sensorService.findById(sensor_id);
+        Date date = new Date(time);
+        Data data = new Data(sensorData,date,1L,sensor);
+        return  data;
+    }
+
+    private void createSensorException(Long sensor_id){
+        Sensor sensor = sensorService.findById(sensor_id);
+        String mesage = "未接受到数据";
+        Date date = new Date();
+        SensorException sensorException = new SensorException(mesage,date,1L,sensor);
+        try{
+            sensorExceptionService.insert(sensorException);
+        }catch (Exception e){
+            System.out.print(e.toString());
+        }
+
+    }
 }
+

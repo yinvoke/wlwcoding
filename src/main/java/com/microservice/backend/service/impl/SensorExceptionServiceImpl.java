@@ -36,4 +36,9 @@ public class SensorExceptionServiceImpl implements SensorExceptionService {
         }
         return sensorExceptionRepository.findByTime(df,dt);
     }
+
+    @Override
+    public void insert(SensorException sensorException) {
+        sensorExceptionRepository.save(sensorException);
+    }
 }
