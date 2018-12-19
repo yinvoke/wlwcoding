@@ -843,13 +843,34 @@ null
     "data": [
         {
             "id": 1,
-            "description":"出现异常",
-            "status": 1,
-            "time": "2018-11-27 02:08:07",
-            "sensor_id": 1
+            "description": "haha，我没电了",
+            "time": "2018-12-13",
+            "status": 0,
+            "gateway": {
+                "id": 2,
+                "ip": "127.0.0.1",
+                "port": "8080",
+                "description": "haha，我是网关1号",
+                "location": "天马-1-3-135",
+                "status": 1
+            }
+        },
+        {
+            "id": 2,
+            "description": "haha，我断电了",
+            "time": "2018-12-20",
+            "status": 0,
+            "gateway": {
+                "id": 1,
+                "ip": "127.0.0.1",
+                "port": "8080",
+                "description": "网关1号",
+                "location": "天马-1-3-135",
+                "status": 1
+            }
         }
     ],
-    "message": "",
+    "message": null,
     "status": "success"
 }
 ```
@@ -872,13 +893,34 @@ null
     "data": [
         {
             "id": 1,
-            "description":"出现异常",
-            "status": 1,
-            "time": "2018-11-27 02:08:07",
-            "gateway_id": 1
+            "description": "haha，我没电了",
+            "time": "2018-12-13",
+            "status": 0,
+            "gateway": {
+                "id": 2,
+                "ip": "127.0.0.1",
+                "port": "8080",
+                "description": "haha，我是网关1号",
+                "location": "天马-1-3-135",
+                "status": 1
+            }
+        },
+        {
+            "id": 2,
+            "description": "haha，我断电了",
+            "time": "2018-12-20",
+            "status": 0,
+            "gateway": {
+                "id": 1,
+                "ip": "127.0.0.1",
+                "port": "8080",
+                "description": "网关1号",
+                "location": "天马-1-3-135",
+                "status": 1
+            }
         }
     ],
-    "message": "",
+    "message": null,
     "status": "success"
 }
 ```
@@ -901,13 +943,34 @@ null
     "data": [
         {
             "id": 1,
-            "description":"出现异常",
-            "status": 1,
-            "time": "2018-11-27 02:08:07",
-            "sensor_id": 1
+            "description": "haha，我没电了",
+            "time": "2018-12-13",
+            "status": 0,
+            "gateway": {
+                "id": 2,
+                "ip": "127.0.0.1",
+                "port": "8080",
+                "description": "haha，我是网关1号",
+                "location": "天马-1-3-135",
+                "status": 1
+            }
+        },
+        {
+            "id": 2,
+            "description": "haha，我断电了",
+            "time": "2018-12-20",
+            "status": 0,
+            "gateway": {
+                "id": 1,
+                "ip": "127.0.0.1",
+                "port": "8080",
+                "description": "网关1号",
+                "location": "天马-1-3-135",
+                "status": 1
+            }
         }
     ],
-    "message": "",
+    "message": null,
     "status": "success"
 }
 ```
@@ -930,13 +993,34 @@ null
     "data": [
         {
             "id": 1,
-            "description":"出现异常",
-            "status": 1,
-            "time": "2018-11-27 02:08:07",
-            "gateway_id": 1
+            "description": "haha，我没电了",
+            "time": "2018-12-13",
+            "status": 0,
+            "gateway": {
+                "id": 2,
+                "ip": "127.0.0.1",
+                "port": "8080",
+                "description": "haha，我是网关1号",
+                "location": "天马-1-3-135",
+                "status": 1
+            }
+        },
+        {
+            "id": 2,
+            "description": "haha，我断电了",
+            "time": "2018-12-20",
+            "status": 0,
+            "gateway": {
+                "id": 1,
+                "ip": "127.0.0.1",
+                "port": "8080",
+                "description": "网关1号",
+                "location": "天马-1-3-135",
+                "status": 1
+            }
         }
     ],
-    "message": "",
+    "message": null,
     "status": "success"
 }
 ```
