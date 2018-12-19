@@ -846,7 +846,7 @@ null
             "description":"出现异常",
             "status": 1,
             "time": "2018-11-27 02:08:07",
-            "gateway_id": 1
+            "sensor_id": 1
         }
     ],
     "message": "",
@@ -875,7 +875,7 @@ null
             "description":"出现异常",
             "status": 1,
             "time": "2018-11-27 02:08:07",
-            "sensor_id": 1
+            "gateway_id": 1
         }
     ],
     "message": "",
@@ -933,7 +933,7 @@ null
             "description":"出现异常",
             "status": 1,
             "time": "2018-11-27 02:08:07",
-            "sensor_id": 1
+            "gateway_id": 1
         }
     ],
     "message": "",
