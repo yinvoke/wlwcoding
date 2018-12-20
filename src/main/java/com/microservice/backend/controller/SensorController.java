@@ -4,6 +4,7 @@ import com.microservice.backend.entity.Data;
 import com.microservice.backend.entity.Gateway;
 import com.microservice.backend.entity.Sensor;
 import com.microservice.backend.entity.SensorClassify;
+import com.microservice.backend.service.DataService;
 import com.microservice.backend.service.GatewayService;
 import com.microservice.backend.service.SensorClassifyService;
 import com.microservice.backend.service.SensorService;
@@ -30,6 +31,9 @@ public class SensorController extends BaseController{
 
     @Autowired
     SensorClassifyService sensorClassifyService;
+
+    @Autowired
+    DataService dataService;
 
     /*
         格式化日期格式，依赖注入类
@@ -153,6 +157,21 @@ public class SensorController extends BaseController{
         return map;
     }
 
+//    @RequestMapping(path="data/{id}",method = RequestMethod.GET,produces = "application/json; charset=utf-8")
+//    @ResponseBody
+//    public HashMap getSensorDataById(@PathVariable("id") long id){
+//        Sensor sensor = sensorService.findById(id);
+//        HashMap map = null;
+//        if (sensor == null){
+//            map = this.setResponse("error","id error,no this sensor",null);
+//            return map;
+//        }
+//
+//        List<Data> datas = sensor.getDatas();
+//        map = this.setResponse("success","",datas);
+//        return map;
+//    }
+
     @RequestMapping(path="data/{id}",method = RequestMethod.GET,produces = "application/json; charset=utf-8")
     @ResponseBody
     public HashMap getSensorDataById(@PathVariable("id") long id){
@@ -163,7 +182,7 @@ public class SensorController extends BaseController{
             return map;
         }
 
-        List<Data> datas = sensor.getDatas();
+        List<Data> datas = dataService.findNewData(30,sensor);
         map = this.setResponse("success","",datas);
         return map;
     }
