@@ -927,9 +927,9 @@ null
 
 #### 0x11 获取一段时间内传感器异常
 
-* url:http://iot.wduozhi.xyz/api/sensorException/{datas}
+* url:http://iot.wduozhi.xyz/api/sensorException/{timetamp}
 * method:get
-* 注解：datas 为 {dataFrom,dataTo} 示例 {2018-10-12 19:30:12,2018-10-13 19:30:12}
+* 注解：timetamp 为 {dateFromtamp@dateToTamp} 示例 {1514773035@1545360731}为起始时间的unix时间戳和终止时间的unix时间戳
 
 ##### get 
 
@@ -978,9 +978,9 @@ null
 
 #### 0x11 获取一段时间内网关异常
 
-* url:http://iot.wduozhi.xyz/api/gatewayException/{datas}
+* url:http://iot.wduozhi.xyz/api/gatewayException/{timetamp}
 * method:get
-* 注解：datas 为 {dataFrom,dataTo} 示例 {2018-10-12 19:30:12,2018-10-13 19:30:12}
+* 注解：timetamp 为 {dateFromtamp@dateToTamp} 示例 {1514773035@1545360731} 为起始时间的unix时间戳和终止时间的unix时间戳
 
 ##### get 
 

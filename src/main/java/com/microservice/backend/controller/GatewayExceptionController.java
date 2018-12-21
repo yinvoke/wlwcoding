@@ -6,7 +6,9 @@ import com.microservice.backend.service.GatewayExceptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,16 +33,17 @@ public class GatewayExceptionController extends BaseController{
         return  map;
     }
 
-    @RequestMapping(path = "/{datas}",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(path = "/{timetamp}",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public HashMap getDataGatewayException(@PathVariable("datas") String datas){
+    public HashMap getDataGatewayException(@PathVariable("timetamp") String timetamp){
         List<GatewayException> gatewayExceptions = new ArrayList<GatewayException>();
-        String[] s = datas.split(",");
-        String dataFrom = s[0];
-        String dataTo = s[1];
+        String[] s = timetamp.split("@");
+        long dateFromTamp = Long.parseLong(s[0])*1000;
+        long dateToTamp = Long.parseLong(s[1])*1000;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         HashMap map = new HashMap();
         try {
-            gatewayExceptions = gatewayExceptionService.findByTime(dataFrom, dataTo);
+            gatewayExceptions = gatewayExceptionService.findByTime(simpleDateFormat.format(dateFromTamp), simpleDateFormat.format(dateToTamp));
         }catch (Exception e){
             map = this.setResponse("error","db error",null);
             return map;

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="SensorException")
+@Table(name="sensor_exception")
 public class SensorException {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

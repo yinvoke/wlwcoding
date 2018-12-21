@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="GagewayException")
+@Table(name="gateway_exception")
 public class GatewayException {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
