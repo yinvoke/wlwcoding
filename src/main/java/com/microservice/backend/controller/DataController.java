@@ -81,10 +81,10 @@ public class DataController extends BaseController {
         }
         HashMap map = new HashMap();
         try{
-            String key = UUIDUtils.getUUID();
-            ListOperations operations = redisTemplate.opsForList();
-            operations.rightPush("sensors",sensorDatas);
-//            dataService.inserts(sensorDatas);
+//            String key = UUIDUtils.getUUID();
+//            ListOperations operations = redisTemplate.opsForList();
+//            operations.rightPush("sensors",sensorDatas);
+            dataService.inserts(sensorDatas);
         }catch (Exception e){
             System.out.print(e.toString());
             map = this.setResponse("error","db error",null);
