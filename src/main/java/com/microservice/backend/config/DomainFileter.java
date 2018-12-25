@@ -29,9 +29,9 @@ public class DomainFileter implements Filter {
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
         //便于调试的代码,上线的时候需要注释掉
-        HttpSession session = request.getSession();
-        User user = new User("debug",null,null,null);
-        session.setAttribute("user",user);
+//        HttpSession session = request.getSession();
+//        User user = new User("debug",null,null,null);
+//        session.setAttribute("user",user);
         chain.doFilter(request,response);
     }
 
