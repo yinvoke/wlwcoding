@@ -1,5 +1,6 @@
 package com.microservice.backend.controller;
 
+import com.microservice.backend.common.utils.UUIDUtils;
 import com.microservice.backend.entity.Data;
 import com.microservice.backend.entity.Sensor;
 import com.microservice.backend.entity.SensorException;
@@ -7,6 +8,8 @@ import com.microservice.backend.service.DataService;
 import com.microservice.backend.service.SensorExceptionService;
 import com.microservice.backend.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -23,6 +26,10 @@ public class DataController extends BaseController {
 
     @Autowired
     SensorService sensorService;
+
+    //redis缓存
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @RequestMapping(path="/{id}",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
@@ -66,7 +73,7 @@ public class DataController extends BaseController {
             Data tmp = this.formateData(Float.parseFloat(hashMap.get("data").toString()),Long.parseLong(hashMap.get("sensor_id").toString()),Long.parseLong(hashMap.get("time").toString()));
 
             //模拟产生传感器异常
-            if(Float.parseFloat(hashMap.get("data").toString()) < 0.2){
+            if(Float.parseFloat(hashMap.get("data").toString()) < 0.1){
                 this.createSensorException(Long.parseLong(hashMap.get("sensor_id").toString()));
             }
 
@@ -74,7 +81,10 @@ public class DataController extends BaseController {
         }
         HashMap map = new HashMap();
         try{
-            dataService.inserts(sensorDatas);
+            String key = UUIDUtils.getUUID();
+            ListOperations operations = redisTemplate.opsForList();
+            operations.rightPush("sensors",sensorDatas);
+//            dataService.inserts(sensorDatas);
         }catch (Exception e){
             System.out.print(e.toString());
             map = this.setResponse("error","db error",null);

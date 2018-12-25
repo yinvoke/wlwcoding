@@ -2,11 +2,16 @@ package com.microservice.backend.schedule;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.microservice.backend.common.utils.UUIDUtils;
+import com.microservice.backend.entity.Data;
 import com.microservice.backend.entity.Gateway;
 import com.microservice.backend.entity.Sensor;
+import com.microservice.backend.service.DataService;
 import com.microservice.backend.service.GatewayService;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +26,13 @@ public class ScheduledTasks {
 
     @Autowired
     GatewayService gatewayService;
+
+    @Autowired
+    DataService dataService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
 
     @Scheduled(fixedDelay = 60 * 1000L)
     public void sendData() {
@@ -55,7 +67,7 @@ public class ScheduledTasks {
         String url = "http://127.0.0.1:8080/api/data/http";
         try{
             String res = this.post(url,json);
-            System.out.println(res);
+//            System.out.println(res);
         }catch (Exception e){
             System.out.print(e.getMessage());
         }
@@ -74,4 +86,23 @@ public class ScheduledTasks {
         Response response = client.newCall(request).execute();
         return response.body().string();
     }
+
+    //定时任务，从redis中取出数据，并存入数据库
+    @Scheduled(fixedDelay = 60 * 5 * 1000L)
+    public void saveData(){
+        try{
+            String key = UUIDUtils.getUUID();
+            ListOperations operations = redisTemplate.opsForList();
+            List<Data> sensorDatas = (ArrayList)operations.leftPop("sensors");
+            dataService.inserts(sensorDatas);
+            for (Data data : sensorDatas) {
+                System.out.println(data.getData());
+            }
+//            dataService.inserts(sensorDatas);
+        }catch (Exception e){
+            System.out.print(e.toString());
+
+        }
+    }
+
 }
