@@ -43,7 +43,7 @@ public class GatewayExceptionController extends BaseController{
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         HashMap map = new HashMap();
         try {
-            gatewayExceptions = gatewayExceptionService.findByTime(simpleDateFormat.format(dateFromTamp), simpleDateFormat.format(dateToTamp));
+            gatewayExceptions = gatewayExceptionService.findByTime(simpleDateFormat.format(dateFromTamp), simpleDateFormat.format(dateToTamp),30);
         }catch (Exception e){
             map = this.setResponse("error","db error",null);
             return map;

@@ -42,7 +42,7 @@ public class SensorExceptionController extends BaseController{
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         HashMap map = new HashMap();
         try {
-            sensorExceptions = sensorExceptionService.findByTime(simpleDateFormat.format(dateFromTamp), simpleDateFormat.format(dateToTamp));
+            sensorExceptions = sensorExceptionService.findByTime(simpleDateFormat.format(dateFromTamp), simpleDateFormat.format(dateToTamp),30);
         }catch (Exception e){
             map = this.setResponse("error","db error",null);
             return map;

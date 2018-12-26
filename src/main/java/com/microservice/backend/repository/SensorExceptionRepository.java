@@ -1,6 +1,8 @@
 package com.microservice.backend.repository;
 
 import com.microservice.backend.entity.SensorException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,5 +15,5 @@ public interface SensorExceptionRepository extends JpaRepository<SensorException
     List<SensorException> findAll();
 
     @Query(value = "SELECT * from sensor_exception se where se.time>?1 and se.time<?2",nativeQuery = true)
-    List<SensorException> findByTime(Date dataFrom, Date dataTo);
+    Page<SensorException> findByTime(Date dataFrom, Date dataTo, Pageable pageable);
 }

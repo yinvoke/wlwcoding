@@ -1,6 +1,8 @@
 package com.microservice.backend.repository;
 
 import com.microservice.backend.entity.GatewayException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,5 +16,5 @@ public interface GatewayExceptionRepository extends JpaRepository<GatewayExcepti
     List<GatewayException> findAll();
 
     @Query(value = "SELECT * from gateway_exception ge where ge.time>?1 and ge.time<?2",nativeQuery = true)
-    List<GatewayException> findByTime(Date dataFrom, Date dataTo);
+    Page<GatewayException> findByTime(Date dataFrom, Date dataTo, Pageable pageable);
 }

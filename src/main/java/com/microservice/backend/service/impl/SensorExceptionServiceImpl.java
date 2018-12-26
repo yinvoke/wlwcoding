@@ -5,11 +5,16 @@ import com.microservice.backend.entity.SensorException;
 import com.microservice.backend.repository.GatewayExceptionRepository;
 import com.microservice.backend.repository.SensorExceptionRepository;
 import com.microservice.backend.service.SensorExceptionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service("sensorExceptionService")
@@ -23,7 +28,7 @@ public class SensorExceptionServiceImpl implements SensorExceptionService {
     }
 
     @Override
-    public List<SensorException> findByTime(String dataFrom, String dataTo){
+    public List<SensorException> findByTime(String dataFrom, String dataTo, int num){
 
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date df = null;
@@ -34,7 +39,13 @@ public class SensorExceptionServiceImpl implements SensorExceptionService {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return sensorExceptionRepository.findByTime(df,dt);
+        Page<SensorException> page = sensorExceptionRepository.findByTime(df,dt, PageRequest.of(0, num, Sort.by(Sort.Direction.DESC, "time")));
+        Iterator<SensorException> all = page.iterator();
+        List<SensorException> list = new ArrayList<>();
+        while(all.hasNext()){
+            list.add(all.next());
+        }
+        return list;
     }
 
     @Override
