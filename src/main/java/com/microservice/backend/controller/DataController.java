@@ -1,12 +1,8 @@
 package com.microservice.backend.controller;
 
 import com.microservice.backend.common.utils.UUIDUtils;
-import com.microservice.backend.entity.Data;
-import com.microservice.backend.entity.Sensor;
-import com.microservice.backend.entity.SensorException;
-import com.microservice.backend.service.DataService;
-import com.microservice.backend.service.SensorExceptionService;
-import com.microservice.backend.service.SensorService;
+import com.microservice.backend.entity.*;
+import com.microservice.backend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -27,6 +23,11 @@ public class DataController extends BaseController {
     @Autowired
     SensorService sensorService;
 
+    @Autowired
+    GatewayService gatewayService;
+
+    @Autowired
+    GatewayExceptionService gatewayExceptionService;
     //redis缓存
     @Autowired
     private RedisTemplate redisTemplate;
@@ -73,8 +74,13 @@ public class DataController extends BaseController {
             Data tmp = this.formateData(Float.parseFloat(hashMap.get("data").toString()),Long.parseLong(hashMap.get("sensor_id").toString()),Long.parseLong(hashMap.get("time").toString()));
 
             //模拟产生传感器异常
-            if(Float.parseFloat(hashMap.get("data").toString()) < 0.1){
+            if(Float.parseFloat(hashMap.get("data").toString()) < 0.6){
                 this.createSensorException(Long.parseLong(hashMap.get("sensor_id").toString()));
+            }
+
+            //模拟产生网关异常
+            if(Float.parseFloat(hashMap.get("data").toString()) < 0.25){
+                this.createGatewayException(Long.parseLong(hashMap.get("gateway_id").toString()));
             }
 
             sensorDatas.add(tmp);
@@ -101,11 +107,27 @@ public class DataController extends BaseController {
         return  data;
     }
 
+    private void createGatewayException(long gateway_id){
+        Gateway gateway = gatewayService.findById(gateway_id);
+        String mesage[] = {"未接收到数据","连接异常","网络异常","数据异常"};
+        Date date = new Date();
+        Random random = new Random();
+        int index = random.nextInt(4);
+        GatewayException gatewayException = new GatewayException(mesage[index],date,1L,gateway);
+        try{
+            gatewayExceptionService.insert(gatewayException);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     private void createSensorException(Long sensor_id){
         Sensor sensor = sensorService.findById(sensor_id);
-        String mesage = "未接受到数据";
+        String mesage[] = {"未接收到数据","连接异常","网络异常","数据异常"};
         Date date = new Date();
-        SensorException sensorException = new SensorException(mesage,date,1L,sensor);
+        Random random = new Random();
+        int index = random.nextInt(4);
+        SensorException sensorException = new SensorException(mesage[index],date,1L,sensor);
         try{
             sensorExceptionService.insert(sensorException);
         }catch (Exception e){

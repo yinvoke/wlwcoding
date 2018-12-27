@@ -53,6 +53,7 @@ public class ScheduledTasks {
             tmp.put("data",ran);
             tmp.put("time",now);
             tmp.put(("sensor_id"),sensor.getId());
+            tmp.put("gateway_id",sensor.getGateway().getId());
             datas.add(tmp);
         }
 
