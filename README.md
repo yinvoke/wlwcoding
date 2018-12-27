@@ -1028,7 +1028,7 @@ null
 
 #### 0x14 获取所有传感器异常(分页版本)
 
-* url:http://iot.wduozhi.xyz/api/sensorException
+* url:http://iot.wduozhi.xyz/api/sensorException/page/{page}
 * method:get
 
 ##### get 
@@ -1214,7 +1214,7 @@ null
 
 #### 0x15 获取所有网关异常(分页版本)
 
-* url:http://iot.wduozhi.xyz/api/gatewayException
+* url:http://iot.wduozhi.xyz/api/gatewayException/page/{page}
 * method:get
 
 ##### get 
