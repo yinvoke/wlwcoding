@@ -925,7 +925,7 @@ null
 }
 ```
 
-#### 0x11 获取一段时间内传感器异常
+#### 0x12 获取一段时间内传感器异常
 
 * url:http://iot.wduozhi.xyz/api/sensorException/{timetamp}
 * method:get
@@ -976,7 +976,7 @@ null
 ```
 
 
-#### 0x11 获取一段时间内网关异常
+#### 0x13 获取一段时间内网关异常
 
 * url:http://iot.wduozhi.xyz/api/gatewayException/{timetamp}
 * method:get
@@ -1020,6 +1020,447 @@ null
             }
         }
     ],
+    "message": null,
+    "status": "success"
+}
+```
+
+
+#### 0x14 获取所有传感器异常(分页版本)
+
+* url:http://iot.wduozhi.xyz/api/sensorException
+* method:get
+
+##### get 
+
+* page
+
+##### return 
+
+```
+{
+    "data": {
+        "content": [
+            {
+                "id": 81,
+                "description": "网络异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 4,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "haha，我是网关3号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            },
+            {
+                "id": 80,
+                "description": "网络异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 3,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "haha，我是网关2号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            },
+            {
+                "id": 79,
+                "description": "连接异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 4,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "haha，我是网关3号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            },
+            {
+                "id": 78,
+                "description": "网络异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 3,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "haha，我是网关2号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            },
+            {
+                "id": 77,
+                "description": "未接收到数据",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 1,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "网关1号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            },
+            {
+                "id": 76,
+                "description": "网络异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 3,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "haha，我是网关2号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            },
+            {
+                "id": 75,
+                "description": "网络异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 1,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "网关1号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            },
+            {
+                "id": 74,
+                "description": "数据异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 1,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "网关1号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            },
+            {
+                "id": 73,
+                "description": "连接异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 4,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "haha，我是网关3号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            },
+            {
+                "id": 72,
+                "description": "数据异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "gateway": {
+                    "id": 3,
+                    "ip": "127.0.0.1",
+                    "port": "8080",
+                    "description": "haha，我是网关2号",
+                    "location": "天马-1-3-135",
+                    "status": 1
+                }
+            }
+        ],
+        "pageable": {
+            "sort": {
+                "sorted": true,
+                "unsorted": false
+            },
+            "offset": 0,
+            "pageSize": 10,
+            "pageNumber": 0,
+            "paged": true,
+            "unpaged": false
+        },
+        "totalElements": 81,
+        "totalPages": 9,
+        "last": false,
+        "number": 0,
+        "size": 10,
+        "sort": {
+            "sorted": true,
+            "unsorted": false
+        },
+        "numberOfElements": 10,
+        "first": true
+    },
+    "message": null,
+    "status": "success"
+}
+```
+
+
+
+#### 0x15 获取所有网关异常(分页版本)
+
+* url:http://iot.wduozhi.xyz/api/gatewayException
+* method:get
+
+##### get 
+
+* page
+
+##### return 
+
+```
+{
+    "data": {
+        "content": [
+            {
+                "id": 15819,
+                "description": "未接收到数据",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 7,
+                    "description": "检测温度",
+                    "location": "机房2",
+                    "factory": "中国",
+                    "install_time": "2018-11-17",
+                    "produce_date": "1970-01-23",
+                    "maintenance_time": "1970-01-23",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 1,
+                        "name": "温度传感器",
+                        "status": 1
+                    }
+                }
+            },
+            {
+                "id": 15818,
+                "description": "连接异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 3,
+                    "description": "我是网关一号233",
+                    "location": "天马-1-3-135",
+                    "factory": "华美集团",
+                    "install_time": "2009-02-09",
+                    "produce_date": "2009-02-09",
+                    "maintenance_time": "2009-02-09",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 1,
+                        "name": "温度传感器",
+                        "status": 1
+                    }
+                }
+            },
+            {
+                "id": 15817,
+                "description": "网络异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 20,
+                    "description": "new",
+                    "location": "434",
+                    "factory": "信息科学与工程学院",
+                    "install_time": "2018-12-02",
+                    "produce_date": "2018-11-30",
+                    "maintenance_time": "2018-12-21",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 3,
+                        "name": " 湿度传感器_2",
+                        "status": 1
+                    }
+                }
+            },
+            {
+                "id": 15816,
+                "description": "网络异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 10,
+                    "description": "检测机房二号服务器",
+                    "location": "天马135",
+                    "factory": "哈哈",
+                    "install_time": "2018-11-17",
+                    "produce_date": "2018-10-30",
+                    "maintenance_time": "2018-11-28",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 2,
+                        "name": "湿度传感器_1",
+                        "status": 1
+                    }
+                }
+            },
+            {
+                "id": 15814,
+                "description": "连接异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 16,
+                    "description": "哈哈哈哈",
+                    "location": "哈哈",
+                    "factory": "哈哈",
+                    "install_time": "2018-11-18",
+                    "produce_date": "2018-10-31",
+                    "maintenance_time": "2018-11-29",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 1,
+                        "name": "温度传感器",
+                        "status": 1
+                    }
+                }
+            },
+            {
+                "id": 15813,
+                "description": "未接收到数据",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 11,
+                    "description": "哈哈哈哈",
+                    "location": "哈哈",
+                    "factory": "哈哈",
+                    "install_time": "2018-11-18",
+                    "produce_date": "2018-10-31",
+                    "maintenance_time": "2018-11-29",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 1,
+                        "name": "温度传感器",
+                        "status": 1
+                    }
+                }
+            },
+            {
+                "id": 15815,
+                "description": "数据异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 8,
+                    "description": "检测湿度",
+                    "location": "机房3",
+                    "factory": "中国",
+                    "install_time": "2018-11-17",
+                    "produce_date": "2018-10-30",
+                    "maintenance_time": "2018-11-28",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 2,
+                        "name": "湿度传感器_1",
+                        "status": 1
+                    }
+                }
+            },
+            {
+                "id": 15812,
+                "description": "数据异常",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 9,
+                    "description": "检测湿度",
+                    "location": "主站",
+                    "factory": "中国",
+                    "install_time": "2018-11-18",
+                    "produce_date": "2018-10-31",
+                    "maintenance_time": "2018-11-29",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 2,
+                        "name": "湿度传感器_1",
+                        "status": 1
+                    }
+                }
+            },
+            {
+                "id": 15810,
+                "description": "未接受到数据",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 4,
+                    "description": "我是传感器4号",
+                    "location": "天马-1-3-135",
+                    "factory": "中国制造",
+                    "install_time": "2009-02-07",
+                    "produce_date": "2009-02-07",
+                    "maintenance_time": "2009-02-07",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 2,
+                        "name": "湿度传感器_1",
+                        "status": 1
+                    }
+                }
+            },
+            {
+                "id": 15811,
+                "description": "未接受到数据",
+                "time": "2018-12-27",
+                "status": 1,
+                "sensor": {
+                    "id": 3,
+                    "description": "我是网关一号233",
+                    "location": "天马-1-3-135",
+                    "factory": "华美集团",
+                    "install_time": "2009-02-09",
+                    "produce_date": "2009-02-09",
+                    "maintenance_time": "2009-02-09",
+                    "status": 1,
+                    "sensorClassify": {
+                        "id": 1,
+                        "name": "温度传感器",
+                        "status": 1
+                    }
+                }
+            }
+        ],
+        "pageable": {
+            "sort": {
+                "sorted": true,
+                "unsorted": false
+            },
+            "offset": 20,
+            "pageSize": 10,
+            "pageNumber": 2,
+            "unpaged": false,
+            "paged": true
+        },
+        "last": false,
+        "totalElements": 401,
+        "totalPages": 41,
+        "number": 2,
+        "size": 10,
+        "numberOfElements": 10,
+        "sort": {
+            "sorted": true,
+            "unsorted": false
+        },
+        "first": false
+    },
     "message": null,
     "status": "success"
 }

@@ -5,6 +5,7 @@ import com.microservice.backend.repository.GatewayExceptionRepository;
 import com.microservice.backend.service.GatewayExceptionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,11 @@ public class GatewayExceptionServiceImpl implements GatewayExceptionService {
     @Override
     public List<GatewayException> findAll(){
         return gatewayExceptionRepository.findAll();
+    }
+
+    @Override
+    public Page<GatewayException> findAll(Pageable pageable){
+        return gatewayExceptionRepository.findAll(pageable);
     }
 
     @Override

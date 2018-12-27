@@ -14,6 +14,8 @@ public interface SensorExceptionRepository extends JpaRepository<SensorException
     @Query("SELECT se from SensorException se")
     List<SensorException> findAll();
 
+    Page<SensorException> findAll(Pageable pageable);
+
     @Query(value = "SELECT * from sensor_exception se where se.time>?1 and se.time<?2",nativeQuery = true)
     Page<SensorException> findByTime(Date dataFrom, Date dataTo, Pageable pageable);
 }

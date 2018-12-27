@@ -7,6 +7,7 @@ import com.microservice.backend.repository.SensorExceptionRepository;
 import com.microservice.backend.service.SensorExceptionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,11 @@ public class SensorExceptionServiceImpl implements SensorExceptionService {
     @Override
     public List<SensorException> findAll(){
         return sensorExceptionRepository.findAll();
+    }
+
+    @Override
+    public Page<SensorException> findAll(Pageable pageable){
+        return sensorExceptionRepository.findAll(pageable);
     }
 
     @Override

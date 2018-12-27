@@ -4,6 +4,10 @@ package com.microservice.backend.controller;
 import com.microservice.backend.entity.GatewayException;
 import com.microservice.backend.service.GatewayExceptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +37,23 @@ public class GatewayExceptionController extends BaseController{
         return  map;
     }
 
+    @RequestMapping(value="/page/{page}",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public HashMap getAllGatewayExceptionByPage(@PathVariable("page")int page){
+        Page<GatewayException> gatewayExceptions;
+        HashMap map = new HashMap();
+        Pageable pageable = new PageRequest(page,10, Sort.Direction.DESC,"time");
+        try {
+            gatewayExceptions = gatewayExceptionService.findAll(pageable);
+        }catch (Exception e){
+            map = this.setResponse("errror","db error",null);
+            return map;
+        }
+
+        map = this.setResponse("success",null,gatewayExceptions);
+        return  map;
+    }
+
     @RequestMapping(path = "/{timetamp}",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
     public HashMap getDataGatewayException(@PathVariable("timetamp") String timetamp){
@@ -52,4 +73,5 @@ public class GatewayExceptionController extends BaseController{
         map = this.setResponse("success",null,gatewayExceptions);
         return  map;
     }
+
 }
