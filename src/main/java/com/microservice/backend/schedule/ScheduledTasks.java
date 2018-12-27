@@ -93,13 +93,17 @@ public class ScheduledTasks {
     public void saveData(){
         try{
             String key = UUIDUtils.getUUID();
-            ListOperations operations = redisTemplate.opsForList();
-            List<Data> sensorDatas = (ArrayList)operations.leftPop("sensors");
-            dataService.inserts(sensorDatas);
-            for (Data data : sensorDatas) {
-                System.out.println(data.getData());
+            ListOperations<String,Data> operations = redisTemplate.opsForList();
+
+            List<Data> sensorDatas = new ArrayList<Data>();
+            Data data = null;
+            while((data = (Data)operations.leftPop("sensors")) != null){
+                sensorDatas.add(data);
             }
-//            dataService.inserts(sensorDatas);
+            dataService.inserts(sensorDatas);
+//            for (Data d : sensorDatas ){
+//                System.out.println(d.getData());
+//            }
         }catch (Exception e){
             System.out.print(e.toString());
 

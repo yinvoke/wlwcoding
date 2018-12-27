@@ -69,6 +69,7 @@ public class DataController extends BaseController {
     public HashMap receive(@RequestBody Map jsonParam){
         List jsonDatas = (ArrayList)jsonParam.get("datas");
         List<Data> sensorDatas = new ArrayList<>();
+        ListOperations<String,Data> operations = redisTemplate.opsForList(); //redis
         for(int i=0;i< jsonDatas.size();i++){
             HashMap hashMap = (HashMap)jsonDatas.get(i);
             Data tmp = this.formateData(Float.parseFloat(hashMap.get("data").toString()),Long.parseLong(hashMap.get("sensor_id").toString()),Long.parseLong(hashMap.get("time").toString()));
@@ -82,7 +83,7 @@ public class DataController extends BaseController {
             if(Float.parseFloat(hashMap.get("data").toString()) < 0.25){
                 this.createGatewayException(Long.parseLong(hashMap.get("gateway_id").toString()));
             }
-
+            operations.rightPush("sensors",tmp);  //加入缓存
             sensorDatas.add(tmp);
         }
         HashMap map = new HashMap();
