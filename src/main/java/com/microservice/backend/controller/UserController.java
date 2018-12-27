@@ -1,5 +1,6 @@
 package com.microservice.backend.controller;
 
+import com.microservice.backend.common.utils.EncryptUtil;
 import com.microservice.backend.common.utils.ErrorResponseUtil;
 import com.microservice.backend.entity.User;
 import com.microservice.backend.service.UserService;
@@ -41,7 +42,7 @@ public class UserController extends BaseController{
     @ResponseBody
     public HashMap login(HttpServletRequest request){
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String password = EncryptUtil.getMD5(request.getParameter("password"));
         HashMap map = new HashMap();
         User user;
         try {
@@ -53,7 +54,7 @@ public class UserController extends BaseController{
         }
 
         if(user == null){
-            map = this.setResponse("error","passwrd error or user not exist",null);
+            map = this.setResponse("error",password,null);
             return  map;
         }
         //登录成功，添加session
@@ -67,8 +68,8 @@ public class UserController extends BaseController{
     @ResponseBody
     public HashMap changePassword(HttpServletRequest request){
         long id = Long.parseLong(request.getParameter("id"));
-        String oldPassword = request.getParameter("oldPassword");
-        String newPassword = request.getParameter("newPassword");
+        String oldPassword = EncryptUtil.getMD5(request.getParameter("oldPassword"));
+        String newPassword = EncryptUtil.getMD5(request.getParameter("newPassword"));
         User user = userService.findById(id);
         HashMap map = null;
         if(user == null){

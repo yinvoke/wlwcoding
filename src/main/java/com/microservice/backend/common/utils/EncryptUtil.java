@@ -64,5 +64,7 @@ public class EncryptUtil {
         return s;
     }
 
-
+    public static void main(String arvg[]){
+        System.out.println(EncryptUtil.getMD5("coding"));
+    }
 }
