@@ -1,7 +1,6 @@
 package com.microservice.backend.controller;
 
 import com.microservice.backend.common.utils.DownloadFileUtil;
-import com.microservice.backend.entity.GatewayException;
 import com.microservice.backend.entity.SensorException;
 import com.microservice.backend.service.SensorExceptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,12 +86,12 @@ public class SensorExceptionController extends BaseController{
     public Object downloadSensorException() throws IOException{
         //读取数据
         List<SensorException> sensorExceptions = new ArrayList<SensorException>();
-        HashMap map;
+        HashMap map = new HashMap();
         ResponseEntity<InputStreamResource> response = null;
         //命名
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-        String filename = dateFormat.format(date)+".txt";
+        String filename = dateFormat.format(date)+"@sensorException.txt";
         //创建文件
         URL url = this.getClass().getClassLoader().getResource("downloadfiles");
         System.out.println(url.getPath());
@@ -109,23 +108,23 @@ public class SensorExceptionController extends BaseController{
             for(int i = 0; i < sensorExceptions.size(); i++) {
                 ps.append("Id:"+sensorExceptions.get(i).getId()+"\t");
                 ps.append("Description:"+sensorExceptions.get(i).getDescription()+"\t");
-                ps.append("SensorId:"+sensorExceptions.get(i).getSensor().getId()+"\t");
-                ps.append("SensorDescription:"+sensorExceptions.get(i).getSensor().getDescription()+"\t");
-                ps.append("SensorInstall_time():"+sensorExceptions.get(i).getSensor().getInstall_time()+"\t");
-                ps.append("SensorLocation:"+sensorExceptions.get(i).getSensor().getLocation()+"\t");
-                ps.append("SensorGateway:"+sensorExceptions.get(i).getSensor().getGateway()+"\t");
-                ps.append("SensorFactory:"+sensorExceptions.get(i).getSensor().getFactory()+"\t");
-                ps.append("SensorStatus:"+sensorExceptions.get(i).getSensor().getStatus()+"\t");
-                ps.append("SensorDatas:"+sensorExceptions.get(i).getSensor().getDatas()+"\t");
-                ps.append("SensorSensorClassify:"+sensorExceptions.get(i).getSensor().getSensorClassify()+"\t");
-                ps.append("SensorMaintenance_time:"+sensorExceptions.get(i).getSensor().getMaintenance_time()+"\t");
-                ps.append("SensorProduce_date:"+sensorExceptions.get(i).getSensor().getProduce_date()+"\t");
-                ps.append("SensorSensorExceptions:"+sensorExceptions.get(i).getSensor().getSensorExceptions()+"\t");
+                ps.append("Time:"+sensorExceptions.get(i).getTime()+"\t");
                 ps.append("Status:"+sensorExceptions.get(i).getStatus()+"\t");
-                ps.append("Time:"+sensorExceptions.get(i).getTime()+"\n");
+                ps.append("Sensor_Id:"+sensorExceptions.get(i).getSensor().getId()+"\t");
+                ps.append("Sensor_Description:"+sensorExceptions.get(i).getSensor().getDescription()+"\t");
+                ps.append("Sensor_Location:"+sensorExceptions.get(i).getSensor().getLocation()+"\t");
+                ps.append("Sensor_Factory:"+sensorExceptions.get(i).getSensor().getFactory()+"\t");
+                ps.append("Sensor_Install_time:"+sensorExceptions.get(i).getSensor().getInstall_time()+"\t");
+                ps.append("Sensor_Produce_date:"+sensorExceptions.get(i).getSensor().getProduce_date()+"\t");
+                ps.append("Sensor_Maintenance_time:"+sensorExceptions.get(i).getSensor().getMaintenance_time()+"\t");
+                ps.append("Sensor_Status:"+sensorExceptions.get(i).getSensor().getStatus()+"\t");
+                ps.append("Sensor_SensorClassifyId:"+sensorExceptions.get(i).getSensor().getSensorClassify().getId()+"\t");
+                ps.append("Sensor_SensorClassifyName:"+sensorExceptions.get(i).getSensor().getSensorClassify().getName()+"\t");
+                ps.append("Sensor_SensorClassifyStatus:"+sensorExceptions.get(i).getSensor().getSensorClassify().getStatus()+"\n");
             }
             ps.close();
-            response = DownloadFileUtil.download("downloadfiles",filename,"GatewayExceptions.txt");
+            System.out.println("结果写入成功！");
+            response = DownloadFileUtil.download("downloadfiles",filename,"SensorExceptions");
             System.out.println("下载成功");
         } catch (Exception e) {
             e.printStackTrace();

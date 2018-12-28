@@ -30,7 +30,7 @@ public class DownloadFileUtil {
             headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
             headers.add("Content-Disposition",
                     "attachment; filename="
-                            + new String(newName.getBytes("gbk"), "iso8859-1") + ".xlsx");
+                            + new String(newName.getBytes("gbk"), "iso8859-1") + ".txt");
             headers.add("Pragma", "no-cache");
             headers.add("Expires", "0");
             response = ResponseEntity.ok().headers(headers)

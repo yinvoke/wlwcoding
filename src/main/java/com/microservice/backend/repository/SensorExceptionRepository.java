@@ -4,12 +4,13 @@ import com.microservice.backend.entity.SensorException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Date;
 import java.util.List;
 
-public interface SensorExceptionRepository extends JpaRepository<SensorException,Long> {
+public interface SensorExceptionRepository extends JpaRepository<SensorException,Long> , JpaSpecificationExecutor<SensorException> {
     @Override
     @Query("SELECT se from SensorException se")
     List<SensorException> findAll();

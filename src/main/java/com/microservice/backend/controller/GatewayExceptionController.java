@@ -92,7 +92,7 @@ public class GatewayExceptionController extends BaseController{
         //命名
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-        String filename = dateFormat.format(date)+".txt";
+        String filename = dateFormat.format(date)+"@gatewayException.txt";
         //创建文件
         URL url = this.getClass().getClassLoader().getResource("downloadfiles");
         System.out.println(url.getPath());
@@ -109,18 +109,16 @@ public class GatewayExceptionController extends BaseController{
             for(int i = 0; i < gatewayExceptions.size(); i++) {
                 ps.append("Id:"+gatewayExceptions.get(i).getId()+"\t");
                 ps.append("Description:"+gatewayExceptions.get(i).getDescription()+"\t");
-                ps.append("GatewayId:"+gatewayExceptions.get(i).getGateway().getId()+"\t");
-                ps.append("GatewayDescription:"+gatewayExceptions.get(i).getGateway().getDescription()+"\t");
-                ps.append("GatewayIp:"+gatewayExceptions.get(i).getGateway().getIp()+"\t");
-                ps.append("GatewayLocation:"+gatewayExceptions.get(i).getGateway().getLocation()+"\t");
-                ps.append("GatewayPort:"+gatewayExceptions.get(i).getGateway().getPort()+"\t");
-                ps.append("GatewaySensors:"+gatewayExceptions.get(i).getGateway().getSensors()+"\t");
-                ps.append("GatewayStatus:"+gatewayExceptions.get(i).getGateway().getStatus()+"\t");
-                ps.append("Status:"+gatewayExceptions.get(i).getStatus()+"\t");
                 ps.append("Time:"+gatewayExceptions.get(i).getTime()+"\n");
+                ps.append("Status:"+gatewayExceptions.get(i).getStatus()+"\t");
+                ps.append("Gateway_Id:"+gatewayExceptions.get(i).getGateway().getId()+"\t");
+                ps.append("Gateway_Ip:"+gatewayExceptions.get(i).getGateway().getIp()+"\t");
+                ps.append("Gateway_Port:"+gatewayExceptions.get(i).getGateway().getPort()+"\t");
+                ps.append("Gateway_Description:"+gatewayExceptions.get(i).getGateway().getDescription()+"\t");
+                ps.append("GatewayStatus:"+gatewayExceptions.get(i).getGateway().getStatus()+"\t");
             }
             ps.close();
-            response = DownloadFileUtil.download("downloadfiles",filename,"GatewayExceptions.txt");
+            response = DownloadFileUtil.download("downloadfiles",filename,"GatewayExceptions");
             System.out.println("下载成功");
         } catch (Exception e) {
             e.printStackTrace();
