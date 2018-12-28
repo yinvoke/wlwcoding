@@ -31,7 +31,7 @@ public class DomainFileter implements Filter {
         //便于调试的代码,上线的时候需要注释掉
         HttpSession session = request.getSession();
         User user = new User("debug",null,null,null);
-        session.setAttribute("user",user);
+        session.setAttribute("downloadfiles/user",user);
         chain.doFilter(request,response);
     }
 

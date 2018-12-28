@@ -59,7 +59,7 @@ public class UserController extends BaseController{
         }
         //登录成功，添加session
         HttpSession session = request.getSession();
-        session.setAttribute("user",user);
+        session.setAttribute("downloadfiles/user",user);
         map = this.setResponse("success",null,user);
         return map;
     }

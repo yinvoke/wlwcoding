@@ -1,15 +1,23 @@
 package com.microservice.backend.controller;
 
+import com.microservice.backend.common.utils.DownloadFileUtil;
 import com.microservice.backend.entity.GatewayException;
 import com.microservice.backend.entity.SensorException;
 import com.microservice.backend.service.SensorExceptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,5 +80,59 @@ public class SensorExceptionController extends BaseController{
 
         map = this.setResponse("success",null,sensorExceptions);
         return  map;
+    }
+
+    @RequestMapping(value="/download",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Object downloadSensorException() throws IOException{
+        //读取数据
+        List<SensorException> sensorExceptions = new ArrayList<SensorException>();
+        HashMap map;
+        ResponseEntity<InputStreamResource> response = null;
+        //命名
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        String filename = dateFormat.format(date)+".txt";
+        //创建文件
+        URL url = this.getClass().getClassLoader().getResource("downloadfiles");
+        System.out.println(url.getPath());
+        File file = new File(url.getPath(),filename);
+        if(!file.exists()){
+            file.createNewFile();
+            System.out.println("文件创建成功！");
+        }
+        //写入内容
+        try {
+            sensorExceptions = sensorExceptionService.findAll();
+            System.out.println("查询结果成功！");
+            PrintStream ps = new PrintStream(new FileOutputStream(file),true,"utf-8");
+            for(int i = 0; i < sensorExceptions.size(); i++) {
+                ps.append("Id:"+sensorExceptions.get(i).getId()+"\t");
+                ps.append("Description:"+sensorExceptions.get(i).getDescription()+"\t");
+                ps.append("SensorId:"+sensorExceptions.get(i).getSensor().getId()+"\t");
+                ps.append("SensorDescription:"+sensorExceptions.get(i).getSensor().getDescription()+"\t");
+                ps.append("SensorInstall_time():"+sensorExceptions.get(i).getSensor().getInstall_time()+"\t");
+                ps.append("SensorLocation:"+sensorExceptions.get(i).getSensor().getLocation()+"\t");
+                ps.append("SensorGateway:"+sensorExceptions.get(i).getSensor().getGateway()+"\t");
+                ps.append("SensorFactory:"+sensorExceptions.get(i).getSensor().getFactory()+"\t");
+                ps.append("SensorStatus:"+sensorExceptions.get(i).getSensor().getStatus()+"\t");
+                ps.append("SensorDatas:"+sensorExceptions.get(i).getSensor().getDatas()+"\t");
+                ps.append("SensorSensorClassify:"+sensorExceptions.get(i).getSensor().getSensorClassify()+"\t");
+                ps.append("SensorMaintenance_time:"+sensorExceptions.get(i).getSensor().getMaintenance_time()+"\t");
+                ps.append("SensorProduce_date:"+sensorExceptions.get(i).getSensor().getProduce_date()+"\t");
+                ps.append("SensorSensorExceptions:"+sensorExceptions.get(i).getSensor().getSensorExceptions()+"\t");
+                ps.append("Status:"+sensorExceptions.get(i).getStatus()+"\t");
+                ps.append("Time:"+sensorExceptions.get(i).getTime()+"\n");
+            }
+            ps.close();
+            response = DownloadFileUtil.download("downloadfiles",filename,"GatewayExceptions.txt");
+            System.out.println("下载成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.print("下载失败");
+            map = this.setResponse("error","download error",null);
+            return  map;
+        }
+        return response;
     }
 }
