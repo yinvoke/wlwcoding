@@ -1469,7 +1469,7 @@ null
 
 #### 0x16 下载全部的网关异常
 
-* url:http://iot.wduozhi.xyz/download/GatewayException
+* url:http://iot.wduozhi.xyz/api/download/GatewayException
 * method:get
 
 ##### get 
@@ -1486,7 +1486,7 @@ GatewayExceptions.xls
 
 #### 0x17 下载全部的传感器异常
 
-* url:http://iot.wduozhi.xyz/download/SensorException
+* url:http://iot.wduozhi.xyz/api/download/SensorException
 * method:get
 
 ##### get 
