@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/download")
+@RequestMapping("/api/download")
 public class DownloadController extends BaseController{
     @Autowired
     SensorExceptionService sensorExceptionService;
