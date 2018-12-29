@@ -123,7 +123,8 @@ public class SensorExceptionController extends BaseController{
                 ps.append("Sensor_SensorClassifyStatus:"+sensorExceptions.get(i).getSensor().getSensorClassify().getStatus()+"\n");
             }
             ps.close();
-            System.out.println("结果写入成功！");
+            System.out.println("表格内容写入成功！");
+
             response = DownloadFileUtil.download("downloadfiles",filename,"SensorExceptions");
             System.out.println("下载成功");
         } catch (Exception e) {
