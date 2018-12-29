@@ -30,7 +30,7 @@ public class DataController extends BaseController {
     GatewayExceptionService gatewayExceptionService;
     //redis缓存
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,Data> redisTemplate;
 
     @RequestMapping(path="/{id}",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
@@ -87,16 +87,13 @@ public class DataController extends BaseController {
             sensorDatas.add(tmp);
         }
         HashMap map = new HashMap();
-        try{
-//            String key = UUIDUtils.getUUID();
-//            ListOperations operations = redisTemplate.opsForList();
-//            operations.rightPush("sensors",sensorDatas);
-            dataService.inserts(sensorDatas);
-        }catch (Exception e){
-            System.out.print(e.toString());
-            map = this.setResponse("error","db error",null);
-            return map;
-        }
+//        try{
+//            dataService.inserts(sensorDatas);
+//        }catch (Exception e){
+//            System.out.print(e.toString());
+//            map = this.setResponse("error","db error",null);
+//            return map;
+//        }
         map = this.setResponse("success","",sensorDatas);
         return map;
     }
