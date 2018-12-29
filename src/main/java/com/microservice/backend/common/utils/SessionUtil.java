@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionUtil {
 
-    public static final String USER = "user";
+    public static final String USER = "downloadfiles/user";
 
     /**
      * 从会话中读取用户信息
