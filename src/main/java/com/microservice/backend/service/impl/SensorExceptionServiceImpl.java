@@ -1,8 +1,6 @@
 package com.microservice.backend.service.impl;
 
-import com.microservice.backend.entity.GatewayException;
 import com.microservice.backend.entity.SensorException;
-import com.microservice.backend.repository.GatewayExceptionRepository;
 import com.microservice.backend.repository.SensorExceptionRepository;
 import com.microservice.backend.service.SensorExceptionService;
 import org.springframework.data.domain.Page;

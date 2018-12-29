@@ -1465,3 +1465,38 @@ null
     "status": "success"
 }
 ```
+
+
+#### 0x16 下载全部的网关异常
+
+* url:http://iot.wduozhi.xyz/download/GatewayException
+* method:get
+
+##### get 
+
+null
+
+##### return 
+
+```
+GatewayExceptions.xls
+
+```
+
+
+#### 0x17 下载全部的传感器异常
+
+* url:http://iot.wduozhi.xyz/download/SensorException
+* method:get
+
+##### get 
+
+null
+
+##### return 
+
+```
+SensorExceptions.xls
+
+```
+
