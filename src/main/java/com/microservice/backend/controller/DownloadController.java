@@ -49,7 +49,7 @@ public class DownloadController extends BaseController{
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         String filename = dateFormat.format(date)+"@gatewayException"+".xls";
         //创建文件
-        URL url = this.getClass().getClassLoader().getResource("downloadfiles");
+        URL url = this.getClass().getClassLoader().getResource("");
         System.out.println(url.getPath());
         File file = new File(url.getPath(),filename);
         if(!file.exists()){
@@ -92,7 +92,7 @@ public class DownloadController extends BaseController{
             System.out.println("表格创建成功");
             wb.write( new FileOutputStream(url.getPath()+File.separator+filename));
             System.out.println("文件录入成功");
-            response = DownloadFileUtil.download("downloadfiles",filename,"GatewayExceptions");
+            response = DownloadFileUtil.download("",filename,"GatewayExceptions");
             System.out.println("下载成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,7 +116,7 @@ public class DownloadController extends BaseController{
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         String filename = dateFormat.format(date)+"@sensorException"+".xls";
         //创建文件
-        URL url = this.getClass().getClassLoader().getResource("downloadfiles");
+        URL url = this.getClass().getClassLoader().getResource("");
         System.out.println(url.getPath());
         File file = new File(url.getPath(),filename);
         if(!file.exists()){
@@ -169,7 +169,7 @@ public class DownloadController extends BaseController{
             System.out.println("表格创建成功");
             wb.write( new FileOutputStream(url.getPath()+File.separator+filename));
             System.out.println("文件录入成功");
-            response = DownloadFileUtil.download("downloadfiles",filename,"SensorExceptions");
+            response = DownloadFileUtil.download("",filename,"SensorExceptions");
             System.out.println("下载成功");
         } catch (Exception e) {
             e.printStackTrace();
