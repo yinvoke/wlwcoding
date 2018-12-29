@@ -34,7 +34,7 @@ public class ScheduledTasks {
     private RedisTemplate<String,Data> redisTemplate;
 
 
-    @Scheduled(fixedDelay = 60 * 1000L)
+    @Scheduled(fixedDelay = 10 * 1000L)
     public void sendData() {
         List<Gateway> gateways = gatewayService.findAll();
         HashMap map = new HashMap();
