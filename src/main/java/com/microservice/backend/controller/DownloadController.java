@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,19 +42,16 @@ public class DownloadController extends BaseController{
 
     @RequestMapping(value="/GatewayException",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Object downloadGatewayException() throws IOException {
+    public Object downloadGatewayException(HttpServletResponse response) throws IOException {
         //读取数据
         List<GatewayException> gatewayExceptions = new ArrayList<GatewayException>();
         HashMap map;
-        ResponseEntity<InputStreamResource> response = null;
         //命名
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-        String filename = dateFormat.format(date)+"@gatewayException"+".xls";
-        //创建文件
-        URL url = this.getClass().getClassLoader().getResource("");
-        System.out.println(url.getPath());
-        File file = new File(url.getPath(),filename);
+        String filename = "gatewayException"+".xls";
+
+        File file = new File(filename);
         if(!file.exists()){
             file.createNewFile();
             System.out.println("文件创建成功！");
@@ -90,35 +90,33 @@ public class DownloadController extends BaseController{
                 row.createCell(9).setCellValue(gatewayExceptions.get(i).getGateway().getStatus());
             }
             System.out.println("表格创建成功");
-            wb.write( new FileOutputStream(url.getPath()+File.separator+filename));
-            System.out.println("文件录入成功");
-            response = DownloadFileUtil.download("",filename,"GatewayExceptions");
-            System.out.println("下载成功");
+            response.setContentType("application/vnd.ms-excel");
+            response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(filename, "utf-8"));
+            OutputStream outputStream = response.getOutputStream();
+            wb.write( outputStream);
+            outputStream.flush();
+            outputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.print("下载失败");
-            map = this.setResponse("error","download error",null);
-            return  map;
+            return  "error";
         }
-        return response;
+        return "success";
     }
 
 
     @RequestMapping(value="/SensorException",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Object downloadSensorException() throws IOException {
+    public Object downloadSensorException(HttpServletResponse response) throws IOException {
         //读取数据
         List<SensorException> sensorExceptions = new ArrayList<SensorException>();
         HashMap map;
-        ResponseEntity<InputStreamResource> response = null;
-        //命名
+
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-        String filename = dateFormat.format(date)+"@sensorException"+".xls";
+        String filename = "sensorException"+".xls";
         //创建文件
-        URL url = this.getClass().getClassLoader().getResource("");
-        System.out.println(url.getPath());
-        File file = new File(url.getPath(),filename);
+//        URL url = this.getClass().getClassLoader().getResource("");
+//        System.out.println(url.getPath());
+        File file = new File(filename);
         if(!file.exists()){
             file.createNewFile();
             System.out.println("文件创建成功！");
@@ -166,17 +164,16 @@ public class DownloadController extends BaseController{
                 row.createCell(13).setCellValue(sensorExceptions.get(i).getSensor().getSensorClassify().getName());
                 row.createCell(14).setCellValue(sensorExceptions.get(i).getSensor().getSensorClassify().getStatus());
             }
+            response.setContentType("application/vnd.ms-excel");
+            response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(filename, "utf-8"));
             System.out.println("表格创建成功");
-            wb.write( new FileOutputStream(url.getPath()+File.separator+filename));
-            System.out.println("文件录入成功");
-            response = DownloadFileUtil.download("",filename,"SensorExceptions");
-            System.out.println("下载成功");
+            OutputStream outputStream = response.getOutputStream();
+            wb.write(outputStream);
+            outputStream.flush();
+            outputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.print("下载失败");
-            map = this.setResponse("error","download error",null);
-            return  map;
+            return  "error";
         }
-        return response;
+        return "success";
     }
 }
