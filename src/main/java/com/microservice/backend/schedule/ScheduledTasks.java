@@ -31,7 +31,7 @@ public class ScheduledTasks {
     DataService dataService;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,Data> redisTemplate;
 
 
     @Scheduled(fixedDelay = 60 * 1000L)
@@ -89,21 +89,16 @@ public class ScheduledTasks {
     }
 
     //定时任务，从redis中取出数据，并存入数据库
-//    @Scheduled(fixedDelay = 60 * 5 * 1000L)
+    @Scheduled(fixedDelay = 60 * 5 * 1000L)
     public void saveData(){
         try{
-            String key = UUIDUtils.getUUID();
             ListOperations<String,Data> operations = redisTemplate.opsForList();
-
-            List<Data> sensorDatas = new ArrayList<Data>();
             Data data = null;
-            while((data = (Data)operations.leftPop("sensors")) != null){
-                sensorDatas.add(data);
+            while((data = operations.leftPop("sensors")) != null){
+                System.out.println(data);
+                dataService.insert(data);
             }
-            dataService.inserts(sensorDatas);
-//            for (Data d : sensorDatas ){
-//                System.out.println(d.getData());
-//            }
+
         }catch (Exception e){
             System.out.print(e.toString());
 

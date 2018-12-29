@@ -73,4 +73,8 @@ public class Data implements Serializable{
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
     }
+
+    public String toString(){
+        return data+"-"+sensor.getId();
+    }
 }

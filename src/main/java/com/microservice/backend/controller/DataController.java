@@ -30,7 +30,7 @@ public class DataController extends BaseController {
     GatewayExceptionService gatewayExceptionService;
     //redis缓存
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,Data> redisTemplate;
 
     @RequestMapping(path="/{id}",method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
