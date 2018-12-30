@@ -6,6 +6,7 @@ import com.microservice.backend.entity.Sensor;
 import com.microservice.backend.entity.SensorClassify;
 import com.microservice.backend.service.GatewayService;
 import com.microservice.backend.service.SensorClassifyService;
+import com.microservice.backend.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,9 @@ public class GatewayController extends BaseController{
 
     @Autowired
     SensorClassifyService sensorClassifyService;
+
+    @Autowired
+    SensorService sensorService;
 
     @RequestMapping(value="" ,method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
@@ -80,6 +84,11 @@ public class GatewayController extends BaseController{
         if (gateway == null){
             map = this.setResponse("error","id error,not this gateway",null);
             return map;
+        }
+        List<Sensor> sensors = gateway.getSensors();
+        for(Sensor sensor:sensors){
+            sensor.setStatus(0L);
+            sensorService.update(sensor);
         }
         gateway.setStatus(0L);
         try{
