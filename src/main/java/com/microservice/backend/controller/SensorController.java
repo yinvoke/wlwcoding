@@ -97,6 +97,11 @@ public class SensorController extends BaseController{
             map = this.setResponse("error","id error,not this sensor",null);
             return map;
         }
+
+        if(sensor.getFactory().equals("") || sensor.getDescription().equals("") || sensor.getLocation().equals("")){
+            map = this.setResponse("error","some data null",null);
+            return map;
+        }
         long classify_id = Long.parseLong(request.getParameter("classify_id"));
         SensorClassify classify = sensorClassifyService.findById(classify_id);
         sensor.setSensorClassify(classify);
