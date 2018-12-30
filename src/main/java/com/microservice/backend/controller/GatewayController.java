@@ -36,6 +36,10 @@ public class GatewayController extends BaseController{
         String location = request.getParameter("location");
         Gateway gateway = new Gateway(ip,port,description,location,1L);
         HashMap map = new HashMap();
+        if (port.equals("") || description.equals("") || ip.equals("")){
+            map = this.setResponse("error","some info null",null);
+            return map;
+        }
         try{
             gatewayService.inset(gateway);
         }catch (Exception e){
