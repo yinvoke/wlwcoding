@@ -86,7 +86,8 @@ public class GatewayController extends BaseController{
             return map;
         }
         List<Sensor> sensors = gateway.getSensors();
-        for(Sensor sensor:sensors){
+        for(int i=0;i<sensors.size();i++){
+            Sensor sensor = sensors.get(i);
             sensor.setStatus(0L);
             sensorService.update(sensor);
         }
