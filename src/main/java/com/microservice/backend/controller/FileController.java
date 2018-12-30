@@ -39,7 +39,7 @@ public class FileController {
 
         this.createGatewayTitle(workbook,sheet,gateway,sensors);
 
-        String fileName = "网关"+gateway.getId()+".xls";
+        String fileName = "gateway_log_"+gateway.getId()+".xls";
         try {
             this.buildExcelFile(fileName, workbook);
             this.buildExcelDocument(fileName,workbook,response);
