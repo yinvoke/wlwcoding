@@ -61,14 +61,27 @@ public class GatewayController extends BaseController{
         String location = request.getParameter("location");
         Gateway gateway = gatewayService.findById(id);
         HashMap map = new HashMap();
+        int flag = 0;
         if(ip.length()!=0)
             gateway.setIp(ip);
+        else
+            flag = 1;
         if (port.length()!=0)
             gateway.setPort(port);
+        else
+            flag = 1;
         if(description.length()!=0)
             gateway.setDescription(description);
+        else
+            flag = 1;
         if (location.length()!=0)
             gateway.setLocation(location);
+        else
+            flag = 1;
+        if(flag == 1){
+            map = this.setResponse("error","some data null",null);
+            return map;
+        }
         try{
             gatewayService.update(gateway);
         }catch (Exception e){
