@@ -282,7 +282,7 @@ null
 
 ##### get
 
-null
+* id
 
 ##### return
 
@@ -331,7 +331,7 @@ id
 
 ##### get
 
-gateway's id
+* gateway's id
 
 ##### return
 ```
