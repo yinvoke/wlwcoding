@@ -74,12 +74,12 @@ public class DataController extends BaseController {
             Data tmp = this.formateData(Float.parseFloat(hashMap.get("data").toString()),Long.parseLong(hashMap.get("sensor_id").toString()),Long.parseLong(hashMap.get("time").toString()));
 
             //模拟产生传感器异常
-            if(Float.parseFloat(hashMap.get("data").toString()) < 0.6){
+            if(Float.parseFloat(hashMap.get("data").toString()) < 0.1){
                 this.createSensorException(Long.parseLong(hashMap.get("sensor_id").toString()));
             }
 
             //模拟产生网关异常
-            if(Float.parseFloat(hashMap.get("data").toString()) < 0.25){
+            if(Float.parseFloat(hashMap.get("data").toString()) < 0.1){
                 this.createGatewayException(Long.parseLong(hashMap.get("gateway_id").toString()));
             }
             operations.rightPush("sensors",tmp);  //加入缓存
