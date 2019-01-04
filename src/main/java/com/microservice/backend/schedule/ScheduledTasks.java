@@ -89,7 +89,7 @@ public class ScheduledTasks {
     }
 
     //定时任务，从redis中取出数据，并存入数据库
-    @Scheduled(fixedDelay = 60 * 5 * 1000L)
+    @Scheduled(fixedDelay = 60 * 3 * 1000L)
     public void saveData(){
         try{
             ListOperations<String,Data> operations = redisTemplate.opsForList();
