@@ -24,6 +24,7 @@ public class RedisConfig {
         connectionFactory.setUsePool(true);
         connectionFactory.setHostName("120.79.214.246");
         connectionFactory.setPort(6379);
+        connectionFactory.setPassword("lBccGkGFn4COvmlO");
 
         return connectionFactory;
     }
