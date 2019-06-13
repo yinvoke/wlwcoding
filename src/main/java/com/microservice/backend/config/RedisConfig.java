@@ -22,7 +22,7 @@ public class RedisConfig {
 
         JedisConnectionFactory connectionFactory = new JedisConnectionFactory(poolConfig);
         connectionFactory.setUsePool(true);
-        connectionFactory.setHostName("120.79.214.246");
+        connectionFactory.setHostName("redis");
         connectionFactory.setPort(6379);
         connectionFactory.setPassword("lBccGkGFn4COvmlO");
 
